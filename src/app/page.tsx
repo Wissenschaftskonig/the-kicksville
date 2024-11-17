@@ -8,9 +8,11 @@ import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import { useEffect, useState } from "react";
 import { showToast } from "@/utils";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [targetTime, setTargetTime] = useState<number | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setTargetTime(new Date("2025-01-01T00:00:00").getTime());
@@ -18,12 +20,14 @@ export default function Home() {
 
   const addToCart = () => {
     showToast("success", "Added to cart");
-    console.log("added");
+    setTimeout(() => {
+      router.push("/cart");
+    }, 2000);
   };
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center px-4 md:px-8 py-4">
+      <main className="flex flex-col items-center justify-center px-4 lg:px-8 py-4">
         <section className="flex flex-col-reverse lg:flex lg:flex-row">
           <div className="flex flex-col justify-center items-center w-full lg:w-1/2 gap-10">
             <aside className="text-left flex flex-col gap-8">

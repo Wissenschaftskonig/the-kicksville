@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 
 interface ButtonProps {
-  buttonSize:
+  buttonSize?:
     | "btn-xs"
     | "btn-sm"
     | "btn-md"
@@ -17,6 +17,8 @@ interface ButtonProps {
     | React.ReactNode
     | React.JSX.Element
     | React.JSX.Element[];
+  buttonTypeOne?: boolean;
+  buttonTypeTwo?: boolean;
 }
 
 const CustomButton = ({
@@ -24,16 +26,31 @@ const CustomButton = ({
   buttonSize,
   onClick,
   disabled,
+  buttonTypeOne,
+  buttonTypeTwo,
+  style,
 }: ButtonProps) => {
   return (
     <>
-      <button
-        className={`btn btn-outline ${buttonSize} text-xs font-thin`}
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {buttonText}
-      </button>
+      {buttonTypeOne && (
+        <button
+          className={`btn btn-outline ${buttonSize} ${style}`}
+          onClick={onClick}
+          disabled={disabled}
+        >
+          {buttonText}
+        </button>
+      )}
+
+      {buttonTypeTwo && (
+        <button
+          onClick={onClick}
+          disabled={disabled}
+          className={`bg-none p-2 border-2 border-black cursor-pointer hover:bg-black hover:text-white ${style}`}
+        >
+          {buttonText}
+        </button>
+      )}
     </>
   );
 };

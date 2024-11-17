@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ThemeContextProvider from "@/components/ThemeContextProvider";
+import ThemeContextProvider from "@/context/ThemeContextProvider";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 import ToastProvider from "@/components/ToastProvider";
@@ -35,7 +35,7 @@ export default function RootLayout({
         <ThemeContextProvider>
           <ToastProvider>
             <ReactQueryProvider>
-              <Navbar numOfCartItems="1" />
+              <Navbar />
               {children}
             </ReactQueryProvider>
           </ToastProvider>

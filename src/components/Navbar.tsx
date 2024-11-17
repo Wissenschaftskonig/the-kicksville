@@ -9,14 +9,14 @@ import { useRouter } from "next/navigation";
 import { Permanent_Marker } from "next/font/google";
 
 interface NavBarProps {
-  numOfCartItems?: string;
+  addedToCart?: boolean;
 }
 const permanentMarker = Permanent_Marker({
   weight: ["400"],
   subsets: ["latin"],
 });
 
-const Navbar = ({ numOfCartItems }: NavBarProps) => {
+const Navbar = ({ addedToCart }: NavBarProps) => {
   const router = useRouter();
 
   const goHome = () => {
@@ -28,15 +28,15 @@ const Navbar = ({ numOfCartItems }: NavBarProps) => {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg shadow-lg backdrop-blur-[6.8px] border-white/2 mb-6">
-        <div className="hover:rotate-[20deg] duration-300 transition-all ease-in-out">
+      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg shadow-lg backdrop-blur-[6.8px] border-white/2 mb-6 sticky top-0 z-50">
+        <div className="hover:-rotate-[20deg] duration-300 transition-all ease-in-out">
           <Image
             alt="logo"
             src={LOGO}
             height={70}
             width={70}
             onClick={goHome}
-            className="hover:cursor-pointer brightness-100 contrast-100"
+            className="hover:cursor-pointer brightness-100 contrast-100 rotate-[20deg]"
           />
         </div>
 
@@ -51,11 +51,8 @@ const Navbar = ({ numOfCartItems }: NavBarProps) => {
               className="h-7 w-7 hover:cursor-pointer"
               onClick={goToCart}
             />
-
-            {numOfCartItems && (
-              <span className="text-sm font-bold text-red-600">
-                {numOfCartItems}
-              </span>
+            {addedToCart && (
+              <span className="badge badge-error rounded-full badge-xs "></span>
             )}
           </div>
 

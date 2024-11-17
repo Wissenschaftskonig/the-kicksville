@@ -53,6 +53,7 @@ const Card = ({ imageSource, onButtonClick }: CardProps) => {
           onClick={onButtonClick}
           buttonText="Order Now"
           buttonSize="btn-sm"
+          buttonTypeOne
         />
       </div>
     </div>

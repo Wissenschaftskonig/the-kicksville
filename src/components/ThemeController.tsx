@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { ThemeContext } from "./ThemeContextProvider";
+import { ThemeContext } from "../context/ThemeContextProvider";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const ThemeController = () => {

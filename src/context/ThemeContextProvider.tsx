@@ -36,6 +36,7 @@ const ThemeContextProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "wireframe";
     setTheme(savedTheme);
+    document.documentElement.classList.add("dark");
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
