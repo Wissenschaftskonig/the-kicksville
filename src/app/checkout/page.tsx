@@ -57,14 +57,13 @@ export default function Checkout() {
     },
   });
 
-  const {
-    mutate: VerifyStatusMutation,
-    isPending,
-    isSuccess,
-  } = useMutation({
+  const { mutate: VerifyStatusMutation, isPending } = useMutation({
     mutationFn: verifyTransaction,
     onSuccess: (data) => {
       showToast("success", data.message);
+      setStep(3);
+      persistCartItem(false);
+
       console.log(data);
     },
     onError: (error: Error) => {
@@ -83,10 +82,6 @@ export default function Checkout() {
 
   const handleVerifyPayment = () => {
     VerifyStatusMutation(mockResponse);
-    if (isSuccess) {
-      setStep(3);
-      persistCartItem(false);
-    }
   };
 
   const handleMethodSelect = (methodId: string) => {
