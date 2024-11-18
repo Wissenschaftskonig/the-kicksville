@@ -13,6 +13,7 @@ import {
 import { verifyTransaction } from "@/actions/verifyTransaction";
 import CustomButton from "@/components/CustomButton";
 import Loader from "@/components/Loader";
+import { useCart } from "@/context/CartContextProvider";
 
 const paymentMethods = [
   {
@@ -43,6 +44,7 @@ export default function Checkout() {
     email: "",
     phoneNumber: "",
   });
+  const { persistCartItem } = useCart();
 
   const { mutate: CreateAccountMutation, data } = useMutation({
     mutationFn: createVirtualAccount,
@@ -55,7 +57,11 @@ export default function Checkout() {
     },
   });
 
-  const { mutate: VerifyStatusMutation, isPending } = useMutation({
+  const {
+    mutate: VerifyStatusMutation,
+    isPending,
+    isSuccess,
+  } = useMutation({
     mutationFn: verifyTransaction,
     onSuccess: (data) => {
       showToast("success", data.message);
@@ -77,6 +83,10 @@ export default function Checkout() {
 
   const handleVerifyPayment = () => {
     VerifyStatusMutation(mockResponse);
+    if (isSuccess) {
+      setStep(3);
+      persistCartItem(false);
+    }
   };
 
   const handleMethodSelect = (methodId: string) => {
@@ -118,7 +128,6 @@ export default function Checkout() {
                 />
               </div>
 
-              {/* Email Input with Icon */}
               <div className="relative">
                 <Icon
                   icon="mdi:email-outline"
@@ -136,7 +145,6 @@ export default function Checkout() {
                 />
               </div>
 
-              {/* Phone Input with Icon */}
               <div className="relative">
                 <Icon
                   icon="mdi:phone-outline"
@@ -325,6 +333,26 @@ export default function Checkout() {
               )}
             </div>
           </>
+        )}
+
+        {step === 3 && (
+          <div className="flex flex-col justify-center items-center h-[70vh] gap-8">
+            <Icon
+              icon="icon-park-twotone:success"
+              className="h-40 w-40 text-green-400"
+            />
+            <div className="text-center">
+              <p className="text-4xl font-bold uppercase my-2">
+                Order Confirmed
+              </p>
+              <p className="text-xl font-thin text-gray-500 uppercase mb-2">
+                Thanks for your patronage
+              </p>
+              <p className="text-xl font-bold capitalize">
+                {customerInfo.fullName}
+              </p>
+            </div>
+          </div>
         )}
       </main>
     </>
