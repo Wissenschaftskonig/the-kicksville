@@ -30,6 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Kicksville</title>
+        <link
+          rel="icon"
+          href="https://freepngimg.com/thumb/shoes/26593-1-vector-shoes-transparent-image.png"
+        />
+        <meta name="description" content="Sales platform" />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

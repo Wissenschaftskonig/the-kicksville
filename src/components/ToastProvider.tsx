@@ -9,8 +9,8 @@ interface ToastProviderProps {
 const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   return (
     <>
-      <ToastContainer className={"bottom-20"} stacked />
       {children}
+      <ToastContainer stacked />
     </>
   );
 };

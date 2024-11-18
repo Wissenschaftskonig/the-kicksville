@@ -9,7 +9,7 @@ import {
 import { toast, ToastContent, ToastOptions, Slide, Id } from "react-toastify";
 
 export const defaultToastOptions: ToastOptions = {
-  position: "bottom-right",
+  position: "top-center",
   autoClose: 3000,
   hideProgressBar: true,
   closeOnClick: true,
@@ -189,4 +189,11 @@ export const mockRequestData = {
   merchant: {
     code: "A33E0",
   },
+};
+
+export const formatAmount = (amount: number): string => {
+  return amount?.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 };
