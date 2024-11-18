@@ -7,17 +7,16 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import ThemeController from "./ThemeController";
 import { useRouter } from "next/navigation";
 import { Permanent_Marker } from "next/font/google";
+import { useCart } from "@/context/CartContextProvider";
 
-interface NavBarProps {
-  addedToCart?: boolean;
-}
 const permanentMarker = Permanent_Marker({
   weight: ["400"],
   subsets: ["latin"],
 });
 
-const Navbar = ({ addedToCart }: NavBarProps) => {
+const Navbar = () => {
   const router = useRouter();
+  const { addedToCart } = useCart();
 
   const goHome = () => {
     router.push("/");

@@ -11,6 +11,7 @@ import {
 } from "@/utils";
 import { verifyTransaction } from "@/actions/verifyTransaction";
 import CustomButton from "@/components/CustomButton";
+import Loader from "@/components/Loader";
 
 const paymentMethods = [
   {
@@ -49,7 +50,7 @@ export default function Checkout() {
     },
   });
 
-  const { mutate: VerifyStatusMutation } = useMutation({
+  const { mutate: VerifyStatusMutation, isPending } = useMutation({
     mutationFn: verifyTransaction,
     onSuccess: (data) => {
       showToast("success", data.message);
@@ -171,7 +172,6 @@ export default function Checkout() {
                   </div>
                 </div>
               )}
-
               {selectedMethod === "transfer" && (
                 <div className="p-6 border border-gray-300 dark:border-zinc-500 rounded-lg space-y-4">
                   <h3 className="font-semibold mb-2">Bank Transfer Details</h3>
@@ -188,7 +188,6 @@ export default function Checkout() {
                   </p>
                 </div>
               )}
-
               {selectedMethod === "ussd" && (
                 <div className="p-6 border border-gray-300 dark:border-zinc-500 rounded-lg space-y-4">
                   <h3 className="font-semibold mb-4">USSD Payment</h3>
@@ -200,12 +199,18 @@ export default function Checkout() {
                   </p>
                 </div>
               )}
-
               <CustomButton
-                buttonText="Complete Payment"
+                buttonText={
+                  isPending ? (
+                    <Loader bodyStyle="bg-transparent" />
+                  ) : (
+                    "Complete Payment"
+                  )
+                }
                 buttonTypeOne
                 style="uppercase text-md font-thin w-full"
                 onClick={handleVerifyPayment}
+                disabled={isPending}
               />
             </div>
           )}

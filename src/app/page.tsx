@@ -9,16 +9,19 @@ import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import { useEffect, useState } from "react";
 import { showToast } from "@/utils";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContextProvider";
 
 export default function Home() {
   const [targetTime, setTargetTime] = useState<number | null>(null);
   const router = useRouter();
+  const { persistCartItem } = useCart();
 
   useEffect(() => {
     setTargetTime(new Date("2025-01-01T00:00:00").getTime());
   }, []);
 
   const addToCart = () => {
+    persistCartItem(true);
     showToast("success", "Added to cart");
     setTimeout(() => {
       router.push("/cart");

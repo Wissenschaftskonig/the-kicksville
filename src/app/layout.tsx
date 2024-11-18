@@ -5,6 +5,7 @@ import ThemeContextProvider from "@/context/ThemeContextProvider";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 import ToastProvider from "@/components/ToastProvider";
+import { CartContextProvider } from "@/context/CartContextProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,12 +34,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeContextProvider>
-          <ToastProvider>
-            <ReactQueryProvider>
-              <Navbar />
-              {children}
-            </ReactQueryProvider>
-          </ToastProvider>
+          <CartContextProvider>
+            <ToastProvider>
+              <ReactQueryProvider>
+                <Navbar />
+                {children}
+              </ReactQueryProvider>
+            </ToastProvider>
+          </CartContextProvider>
         </ThemeContextProvider>
       </body>
     </html>
