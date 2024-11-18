@@ -20,7 +20,9 @@ const Navbar = () => {
 
   const goHome = () => {
     router.push("/");
+    // router.refresh();
   };
+
   const goToCart = () => {
     router.push("/cart");
   };

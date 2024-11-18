@@ -174,23 +174,6 @@ export const getTomorrowDate = (): string => {
   return `${year}-${month}-${day}`;
 };
 
-export const mockRequestData = {
-  bvn: "09871545171",
-  firstName: "James",
-  lastName: "May",
-  middleName: "Joseph",
-  accountName: "KicksVille",
-  email: "james@gmail.com",
-  phone: "08101827000",
-  productType: "TTO",
-  customerReference: generateCustomerReference(),
-  expireAt: generateExpireAt(),
-  singleDepositLimit: "151890",
-  merchant: {
-    code: "A33E0",
-  },
-};
-
 export const formatAmount = (amount: number): string => {
   return amount?.toLocaleString("en-US", {
     minimumFractionDigits: 2,

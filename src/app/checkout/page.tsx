@@ -5,9 +5,10 @@ import { useMutation } from "@tanstack/react-query";
 import { createVirtualAccount } from "@/actions/createVitrualAccount";
 import {
   formatAmount,
+  generateCustomerReference,
+  generateExpireAt,
   getCurrentDate,
   getTomorrowDate,
-  mockRequestData,
   showToast,
 } from "@/utils";
 import { verifyTransaction } from "@/actions/verifyTransaction";
@@ -72,7 +73,23 @@ export default function Checkout() {
   });
 
   const accountData = data?.data?.provider_response;
-  console.log(accountData?.virtualAccount);
+
+  const mockRequestData = {
+    bvn: "09871545171",
+    firstName: "James",
+    lastName: "May",
+    middleName: "Joseph",
+    accountName: "KicksVille",
+    email: "james@gmail.com",
+    phone: "08101827000",
+    productType: "TTO",
+    customerReference: generateCustomerReference(),
+    expireAt: generateExpireAt(),
+    singleDepositLimit: "151890",
+    merchant: {
+      code: "A33E0",
+    },
+  };
 
   const mockResponse = {
     vNUBAN: accountData?.virtualAccount?.vNUBAN,
@@ -280,7 +297,8 @@ export default function Checkout() {
                           </p>
                           <p>
                             Account Name:{" "}
-                            {accountData?.virtualAccount?.accountName}
+                            {accountData?.virtualAccount?.accountName}--
+                            {customerInfo.fullName}
                           </p>
                           <p>
                             Amount:{" "}
@@ -322,7 +340,7 @@ export default function Checkout() {
                     buttonTypeOne
                     style="uppercase text-md font-thin w-full"
                     onClick={handleVerifyPayment}
-                    disabled={isPending}
+                    disabled={isPending || selectedMethod !== "transfer"}
                   />
                 </div>
               )}
