@@ -297,7 +297,7 @@ export default function Checkout() {
                           </p>
                           <p>
                             Account Name:{" "}
-                            {accountData?.virtualAccount?.accountName}--
+                            {accountData?.virtualAccount?.accountName} -{" "}
                             {customerInfo.fullName}
                           </p>
                           <p>
