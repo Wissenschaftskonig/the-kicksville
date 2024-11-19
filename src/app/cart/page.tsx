@@ -63,7 +63,7 @@ export default function Cart() {
               <h2 className="italic">White Sail, Lightning & Chlorophyll</h2>
               <span className="flex items-center justify-center">
                 <Icon icon="tabler:currency-naira" className="text-xl" />
-                <span className="text-base font-bold">151,890</span>
+                <span className="text-base font-bold">10,000</span>
               </span>
             </div>
 

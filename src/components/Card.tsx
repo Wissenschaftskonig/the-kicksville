@@ -33,11 +33,11 @@ const Card = ({ imageSource, onButtonClick }: CardProps) => {
           <p className="flex items-center">
             <span className="flex items-center text-gray-400 line-through">
               <Icon icon="tabler:currency-naira" className="text-sm" />
-              <span className="text-xs">249,000</span>
+              <span className="text-xs">16,393.44</span>
             </span>
             <span className="flex items-center">
               <Icon icon="tabler:currency-naira" className="text-lg" />
-              <span className="text-base font-bold">151,890</span>
+              <span className="text-base font-bold">10,000</span>
             </span>
           </p>
 

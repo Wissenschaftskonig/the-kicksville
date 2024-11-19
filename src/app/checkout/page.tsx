@@ -85,7 +85,7 @@ export default function Checkout() {
     productType: "TTO",
     customerReference: generateCustomerReference(),
     expireAt: generateExpireAt(),
-    singleDepositLimit: "151890",
+    singleDepositLimit: "10000",
     merchant: {
       code: "A33E0",
     },
