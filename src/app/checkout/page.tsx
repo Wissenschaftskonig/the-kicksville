@@ -79,7 +79,7 @@ export default function Checkout() {
     firstName: "James",
     lastName: "May",
     middleName: "Joseph",
-    accountName: "KicksVille",
+    accountName: `KicksVille - ${customerInfo.fullName}`,
     email: "james@gmail.com",
     phone: "08101827000",
     productType: "TTO",
@@ -297,8 +297,7 @@ export default function Checkout() {
                           </p>
                           <p>
                             Account Name:{" "}
-                            {accountData?.virtualAccount?.accountName} -{" "}
-                            {customerInfo.fullName}
+                            {accountData?.virtualAccount?.accountName}
                           </p>
                           <p>
                             Amount:{" "}
