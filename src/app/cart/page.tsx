@@ -28,17 +28,19 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Your Cart</h1>
+      {cartItems.length > 0 && (
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Your Cart</h1>
 
-        <CustomButton
-          buttonText={"Shop For More"}
-          buttonTypeOne
-          buttonSize="btn-sm"
-          style="uppercase font-thin"
-          onClick={goToShop}
-        />
-      </div>
+          <CustomButton
+            buttonText={"Shop For More"}
+            buttonTypeOne
+            buttonSize="btn-sm"
+            style="uppercase font-thin"
+            onClick={goToShop}
+          />
+        </div>
+      )}
 
       {cartItems.length === 0 ? (
         <div className="h-[80vh] w-full m-auto flex flex-col gap-8 justify-center items-center">
