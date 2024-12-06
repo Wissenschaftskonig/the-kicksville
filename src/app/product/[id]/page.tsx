@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SALE_ITEMS, shoeSizes } from "@/utils";
+import { SALE_ITEMS, shoeSizes, showToast } from "@/utils";
 import { use, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CustomButton from "@/components/CustomButton";
@@ -46,7 +46,12 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
         image: item.displayPics[0].pic,
         quantity: 1,
       });
-      router.push("/cart");
+
+      showToast("success", `${item.cardTitle} added to cart`);
+
+      setTimeout(() => {
+        router.push("/cart");
+      }, 1500);
     }
   };
 
@@ -55,7 +60,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
       <Icon
         onClick={goBack}
         icon="mdi:arrow-left"
-        className="h-10 w-10 absolute top-[28rem] left-4 md:top-4 lg:left-8 z-10 bg-gray-100 p-2 rounded-full hover:bg-gray-200"
+        className="h-10 w-10 absolute top-[28rem] left-4 md:top-4 lg:left-8 z-10"
       />
 
       <section className="flex w-full lg:w-1/2 justify-center">

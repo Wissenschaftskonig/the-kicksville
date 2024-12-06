@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CustomButton from "@/components/CustomButton";
 import { useRouter } from "next/navigation";
+import { showToast } from "@/utils";
 
 export default function CartPage() {
   const {
@@ -16,17 +17,44 @@ export default function CartPage() {
   } = useCart();
   const router = useRouter();
 
+  const goToShop = () => {
+    router.push("/");
+  };
+
+  const handleRemoveFromCart = (id: string, size: string) => {
+    removeFromCart(id, size);
+    showToast("success", "Item removed from cart");
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Your Cart</h1>
+
+        <CustomButton
+          buttonText={"Shop For More"}
+          buttonTypeOne
+          buttonSize="btn-sm"
+          style="uppercase font-thin"
+          onClick={goToShop}
+        />
+      </div>
 
       {cartItems.length === 0 ? (
-        <div className="text-center">
-          <p className="text-xl mb-4">Your cart is empty</p>
+        <div className="h-[80vh] w-full m-auto flex flex-col gap-8 justify-center items-center">
+          <Icon icon="game-icons:shopping-cart" className="h-32 w-32" />
+          <div className="text-center space-y-2">
+            <h3 className="text-xl">Seems your cart is empty,</h3>
+            <p className="text-lg">
+              You are just a few clicks away from great discounts!
+            </p>
+          </div>
           <CustomButton
-            buttonText="Continue Shopping"
+            buttonText={"Shop Here"}
             buttonTypeOne
-            onClick={() => router.push("/")}
+            buttonSize="btn-wide"
+            style="uppercase font-thin"
+            onClick={goToShop}
           />
         </div>
       ) : (
@@ -77,7 +105,7 @@ export default function CartPage() {
                 </div>
 
                 <button
-                  onClick={() => removeFromCart(item.id, item.size)}
+                  onClick={() => handleRemoveFromCart(item.id, item.size)}
                   className="text-red-500 hover:text-red-700"
                 >
                   <Icon icon="ep:delete" className="h-6 w-6" />
