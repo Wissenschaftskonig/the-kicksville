@@ -1,10 +1,23 @@
 "use client";
-
+import { StaticImageData } from "next/image";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
+interface CartItem {
+  id: string;
+  name: string;
+  size: string;
+  price: string;
+  image: StaticImageData | string;
+  quantity: number;
+}
+
 interface CartContextProps {
-  addedToCart: boolean;
-  persistCartItem: (value: boolean) => void;
+  cartItems: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: string, size: string) => void;
+  updateQuantity: (id: string, size: string, quantity: number) => void;
+  clearCart: () => void;
+  calculateTotal: () => number;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -14,22 +27,79 @@ export const CartContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [addedToCart, setAddedToCart] = useState(false);
-
-  const persistCartItem = (value: boolean) => {
-    setAddedToCart(value);
-    sessionStorage.setItem("addedToCart", JSON.stringify(value));
-  };
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    const savedCartState = sessionStorage.getItem("addedToCart");
-    if (savedCartState) {
-      persistCartItem(JSON.parse(savedCartState));
+    const savedCartItems = sessionStorage.getItem("cartItems");
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
     }
   }, []);
 
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      const price = parseFloat(item.price.replace(/,/g, ""));
+      return total + price * item.quantity;
+    }, 0);
+  };
+
+  const addToCart = (item: CartItem) => {
+    setCartItems((currentItems) => {
+      const existingItemIndex = currentItems.findIndex(
+        (cartItem) => cartItem.id === item.id && cartItem.size === item.size
+      );
+
+      let updatedItems;
+      if (existingItemIndex > -1) {
+        updatedItems = [...currentItems];
+        updatedItems[existingItemIndex].quantity += item.quantity;
+      } else {
+        updatedItems = [...currentItems, item];
+      }
+
+      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
+
+  const removeFromCart = (id: string, size: string) => {
+    setCartItems((currentItems) => {
+      const updatedItems = currentItems.filter(
+        (item) => !(item.id === id && item.size === size)
+      );
+
+      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
+
+  const updateQuantity = (id: string, size: string, quantity: number) => {
+    setCartItems((currentItems) => {
+      const updatedItems = currentItems.map((item) =>
+        item.id === id && item.size === size ? { ...item, quantity } : item
+      );
+
+      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return updatedItems;
+    });
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    sessionStorage.removeItem("cartItems");
+  };
+
   return (
-    <CartContext.Provider value={{ addedToCart, persistCartItem }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        calculateTotal,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

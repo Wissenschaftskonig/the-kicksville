@@ -2,13 +2,33 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import CustomButton from "./CustomButton";
+import { useRouter } from "next/navigation";
 
 interface CardProps {
   imageSource: StaticImageData;
-  onButtonClick: () => void;
+  cardTitle: string;
+  cardDescription: string;
+  onButtonClick?: () => void;
+  price: string;
+  discountedPrice: string;
+  discountRate: string;
+  cardId: string;
 }
 
-const Card = ({ imageSource, onButtonClick }: CardProps) => {
+const Card = ({
+  imageSource,
+  cardTitle,
+  cardDescription,
+  price,
+  discountedPrice,
+  discountRate,
+  cardId,
+}: CardProps) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/product/${cardId}`);
+  };
   return (
     <div className="border-2 rounded-md border-black h-[25rem] w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-2">
       <div className="overflow-hidden">
@@ -22,8 +42,8 @@ const Card = ({ imageSource, onButtonClick }: CardProps) => {
       </div>
 
       <div>
-        <p className="font-semibold">Jordan True Flight</p>
-        <p className="text-xs italic">White Sail, Lightning & Chlorophyll</p>
+        <p className="font-semibold">{cardTitle}</p>
+        <p className="text-xs italic">{cardDescription}</p>
       </div>
 
       <div className="divider px-2 text-gray-600"></div>
@@ -33,24 +53,24 @@ const Card = ({ imageSource, onButtonClick }: CardProps) => {
           <p className="flex items-center">
             <span className="flex items-center text-gray-400 line-through">
               <Icon icon="tabler:currency-naira" className="text-sm" />
-              <span className="text-xs">16,393.44</span>
+              <span className="text-xs">{price}</span>
             </span>
             <span className="flex items-center">
               <Icon icon="tabler:currency-naira" className="text-lg" />
-              <span className="text-base font-bold">10,000</span>
+              <span className="text-base font-bold">{discountedPrice}</span>
             </span>
           </p>
 
           <div>
             <p>
-              Enjoy <span className="text-red-600">39%</span> off!
+              Enjoy <span className="text-red-600">{discountRate}%</span> off!
             </p>
             <span>Offer valid till January 1.</span>
           </div>
         </div>
 
         <CustomButton
-          onClick={onButtonClick}
+          onClick={handleCardClick}
           buttonText="Order Now"
           buttonSize="btn-sm"
           buttonTypeOne

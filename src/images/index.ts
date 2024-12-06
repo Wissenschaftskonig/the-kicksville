@@ -9,6 +9,9 @@ import IMG_FIVE from "./imgFive.png";
 import IMG_SIX from "./imgSix.png";
 import IMG_SEVEN from "./imgSeven.jpg";
 import IMG_EIGHT from "./imgEight.jpg";
+import SNEAKER_ONE from "./AIR_MAX_DN_SE-removebg-preview.png";
+import SNEAKER_TWO from "./NIKE_DUNK_HI_RETRO-removebg-preview.png";
+import SNEAKER_THREE from "./AIR_JORDAN_1_RETRO_LOW_OG-removebg-preview.png";
 
 export {
   LOGO,
@@ -22,4 +25,7 @@ export {
   IMG_SIX,
   IMG_SEVEN,
   IMG_EIGHT,
+  SNEAKER_ONE,
+  SNEAKER_TWO,
+  SNEAKER_THREE,
 };

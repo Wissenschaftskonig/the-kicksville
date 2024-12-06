@@ -45,7 +45,7 @@ export default function Checkout() {
     email: "",
     phoneNumber: "",
   });
-  const { persistCartItem } = useCart();
+  const { calculateTotal, clearCart } = useCart();
 
   const { mutate: CreateAccountMutation, data } = useMutation({
     mutationFn: createVirtualAccount,
@@ -63,7 +63,7 @@ export default function Checkout() {
     onSuccess: (data) => {
       showToast("success", data.message);
       setStep(3);
-      persistCartItem(false);
+      clearCart();
 
       console.log(data);
     },
@@ -85,7 +85,7 @@ export default function Checkout() {
     productType: "TTO",
     customerReference: generateCustomerReference(),
     expireAt: generateExpireAt(),
-    singleDepositLimit: "10000",
+    singleDepositLimit: calculateTotal().toString(),
     merchant: {
       code: "A33E0",
     },

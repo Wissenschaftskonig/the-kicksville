@@ -9,18 +9,17 @@ import { useRouter } from "next/navigation";
 import { Permanent_Marker } from "next/font/google";
 import { useCart } from "@/context/CartContextProvider";
 
-const permanentMarker = Permanent_Marker({
+export const permanentMarker = Permanent_Marker({
   weight: ["400"],
   subsets: ["latin"],
 });
 
 const Navbar = () => {
   const router = useRouter();
-  const { addedToCart } = useCart();
+  const { cartItems } = useCart();
 
   const goHome = () => {
     router.push("/");
-    // router.refresh();
   };
 
   const goToCart = () => {
@@ -29,7 +28,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg shadow-lg backdrop-blur-[6.8px] border-white/2 mb-6 sticky top-0 z-50">
+      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg shadow-lg backdrop-blur-[6.8px] border-white/2 sticky top-0 z-50">
         <div className="hover:-rotate-[20deg] duration-300 transition-all ease-in-out">
           <Image
             alt="logo"
@@ -46,14 +45,16 @@ const Navbar = () => {
         </p>
 
         <div className="flex gap-3 items-center">
-          <div className="flex">
+          <div className="flex items-start">
             <Icon
               icon="material-symbols:shopping-cart-outline-rounded"
               className="h-7 w-7 hover:cursor-pointer"
               onClick={goToCart}
             />
-            {addedToCart && (
-              <span className="badge badge-error rounded-full badge-xs "></span>
+            {cartItems.length > 0 && (
+              <span className="rounded-full text-white font-bold bg-red-500 text-xs h-4 w-4 text-center">
+                {cartItems.length}
+              </span>
             )}
           </div>
 

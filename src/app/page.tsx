@@ -1,38 +1,27 @@
 "use client";
 
-import { MAIN_IMG, SAMPLE } from "@/images";
+import { MAIN_IMG } from "@/images";
 import Image from "next/image";
 import "./globals.css";
 import Card from "@/components/Card";
 import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
-// import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import "./fliptimer.css";
 import { useEffect, useState } from "react";
-import { showToast } from "@/utils";
-import { useRouter } from "next/navigation";
-import { useCart } from "@/context/CartContextProvider";
+import { SALE_ITEMS } from "@/utils";
+import { permanentMarker } from "@/components/Navbar";
 
 export default function Home() {
   const [targetTime, setTargetTime] = useState<number | null>(null);
-  const router = useRouter();
-  const { persistCartItem } = useCart();
 
   useEffect(() => {
     setTargetTime(new Date("2025-01-01T00:00:00").getTime());
   }, []);
 
-  const addToCart = () => {
-    persistCartItem(true);
-    showToast("success", "Added to cart");
-    setTimeout(() => {
-      router.push("/cart");
-    }, 2000);
-  };
-
+  const [firstItem, ...otherItems] = SALE_ITEMS;
   return (
     <>
-      <main className="flex flex-col items-center justify-center px-4 lg:px-8 py-4">
-        <section className="flex flex-col-reverse lg:flex lg:flex-row">
+      <main className="overflow-x-hidden flex flex-col items-center justify-center px-4 lg:px-8 py-4">
+        <section className="flex flex-col-reverse lg:flex lg:flex-row lg:h-[88dvh]">
           <div className="flex flex-col justify-center items-center w-full lg:w-1/2 gap-10">
             <aside className="text-left flex flex-col gap-8">
               <div>
@@ -44,7 +33,17 @@ export default function Home() {
               </p>
             </aside>
 
-            <Card imageSource={SAMPLE} onButtonClick={addToCart} />
+            {firstItem && (
+              <Card
+                imageSource={firstItem.imageSource}
+                cardTitle={firstItem.cardTitle}
+                cardDescription={firstItem.cardDescription}
+                cardId={firstItem.id}
+                price={firstItem.price}
+                discountRate={firstItem.discountRate}
+                discountedPrice={firstItem.discountedPrice}
+              />
+            )}
           </div>
 
           <aside className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6">
@@ -71,6 +70,46 @@ export default function Home() {
               />
             </div>
           </aside>
+        </section>
+
+        <section className="w-full flex flex-col gap-10 items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
+          <div className="text-center space-y-2">
+            <h2 className={`${permanentMarker.className} text-2xl`}>
+              Exciting Offers
+            </h2>
+            <p>Do not miss these amazing deals!</p>
+          </div>
+
+          <div className="hidden lg:flex justify-evenly w-full">
+            {otherItems.map((item, index) => (
+              <Card
+                key={index}
+                imageSource={item.imageSource}
+                cardTitle={item.cardTitle}
+                cardDescription={item.cardDescription}
+                discountRate={item.discountRate}
+                discountedPrice={item.discountedPrice}
+                price={item.price}
+                cardId={item.id}
+              />
+            ))}
+          </div>
+
+          <div className="lg:hidden carousel carousel-center max-w-sm space-x-6 p-4">
+            {otherItems.map((item, index) => (
+              <div key={index} className="carousel-item">
+                <Card
+                  imageSource={item.imageSource}
+                  cardTitle={item.cardTitle}
+                  cardDescription={item.cardDescription}
+                  discountRate={item.discountRate}
+                  discountedPrice={item.discountedPrice}
+                  price={item.price}
+                  cardId={item.id}
+                />
+              </div>
+            ))}
+          </div>
         </section>
       </main>
     </>
