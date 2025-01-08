@@ -70,6 +70,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
               key={index}
               src={item.pic}
               alt="display images"
+              loading="lazy"
               onMouseEnter={() => setMainPicIndex(index)}
               height={85}
               width={85}

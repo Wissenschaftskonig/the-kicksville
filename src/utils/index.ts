@@ -204,24 +204,15 @@ export const generateExpireAt = (): string => {
   const now = new Date();
   const expireAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
-  const year = expireAt.getFullYear();
-  const month = String(expireAt.getMonth() + 1).padStart(2, "0");
-  const day = String(expireAt.getDate()).padStart(2, "0");
-  const hours = String(expireAt.getHours()).padStart(2, "0");
-  const minutes = String(expireAt.getMinutes()).padStart(2, "0");
-  const seconds = String(expireAt.getSeconds()).padStart(2, "0");
-  const milliseconds = String(expireAt.getMilliseconds()).padStart(3, "0");
+  const year = expireAt.getUTCFullYear();
+  const month = String(expireAt.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(expireAt.getUTCDate()).padStart(2, "0");
+  const hours = String(expireAt.getUTCHours()).padStart(2, "0");
+  const minutes = String(expireAt.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(expireAt.getUTCSeconds()).padStart(2, "0");
+  const milliseconds = String(expireAt.getUTCMilliseconds()).padStart(3, "0");
 
-  const offset = expireAt.getTimezoneOffset();
-  const offsetHours = Math.floor(Math.abs(offset) / 60)
-    .toString()
-    .padStart(2, "0");
-  const offsetMinutes = Math.abs(offset % 60)
-    .toString()
-    .padStart(2, "0");
-  const timezoneSign = offset > 0 ? "-" : "+";
-
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}${timezoneSign}${offsetHours}:${offsetMinutes}`;
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}+0000`;
 };
 
 export const getCurrentDate = (): string => {

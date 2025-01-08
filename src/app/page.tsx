@@ -14,7 +14,7 @@ export default function Home() {
   const [targetTime, setTargetTime] = useState<number | null>(null);
 
   useEffect(() => {
-    setTargetTime(new Date("2025-01-01T00:00:00").getTime());
+    setTargetTime(new Date("2025-05-01T00:00:00").getTime());
   }, []);
 
   const [firstItem, ...otherItems] = SALE_ITEMS;

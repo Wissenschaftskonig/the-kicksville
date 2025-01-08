@@ -36,6 +36,7 @@ const Card = ({
           height={250}
           width={250}
           alt="product"
+          loading="lazy"
           src={imageSource}
           className="transition-transform duration-500 ease-in-out group-hover:-rotate-[20deg] brightness-100"
         />
@@ -65,7 +66,7 @@ const Card = ({
             <p>
               Enjoy <span className="text-red-600">{discountRate}%</span> off!
             </p>
-            <span>Offer valid till January 1.</span>
+            <span>Offer valid till May 1.</span>
           </div>
         </div>
 

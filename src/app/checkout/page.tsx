@@ -91,11 +91,15 @@ export default function Checkout() {
     },
   };
 
+  console.log(mockRequestData);
+
   const mockResponse = {
     vNUBAN: accountData?.virtualAccount?.vNUBAN,
     startDate: getCurrentDate(),
     endDate: getTomorrowDate(),
   };
+
+  console.log(mockResponse);
 
   const handleVerifyPayment = () => {
     VerifyStatusMutation(mockResponse);
