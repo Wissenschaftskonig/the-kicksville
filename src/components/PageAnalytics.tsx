@@ -9,12 +9,16 @@ export default function PageAnalytics() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (pathname) {
-      const url =
-        searchParams.size > 0
-          ? `${pathname}?${searchParams.toString()}`
-          : pathname;
-      pageview(url);
+    try {
+      if (pathname) {
+        const url =
+          searchParams && searchParams.size > 0
+            ? `${pathname}?${searchParams.toString()}`
+            : pathname;
+        pageview(url);
+      }
+    } catch (error) {
+      console.error("Analytics error:", error);
     }
   }, [pathname, searchParams]);
 

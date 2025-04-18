@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { initGA } from "@/utils/analytics";
+import Analytics from "@/components/Analytics";
 
 export default function AnalyticsProvider({
   children,
@@ -12,5 +13,10 @@ export default function AnalyticsProvider({
     initGA();
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      <Analytics />
+      {children}
+    </>
+  );
 }
