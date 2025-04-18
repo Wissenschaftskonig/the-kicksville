@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import PageAnalytics from "@/components/PageAnalytics";
 
 export default function AnalyticsLayout({
@@ -9,7 +10,9 @@ export default function AnalyticsLayout({
 }) {
   return (
     <>
-      <PageAnalytics />
+      <Suspense fallback={null}>
+        <PageAnalytics />
+      </Suspense>
       {children}
     </>
   );
