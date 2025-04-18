@@ -8,6 +8,7 @@ import ToastProvider from "@/providers/ToastProvider";
 import { CartContextProvider } from "@/context/CartContextProvider";
 import AnalyticsProvider from "@/providers/AnalyticsProvider";
 import CookieConsent from "@/components/CookieConsent";
+import AnalyticsLayout from "./layouts/analytics-layout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,7 +46,7 @@ export default function RootLayout({
                 <AnalyticsProvider>
                   <Navbar />
                   <CookieConsent />
-                  {children}
+                  <AnalyticsLayout>{children}</AnalyticsLayout>
                 </AnalyticsProvider>
               </ReactQueryProvider>
             </ToastProvider>
