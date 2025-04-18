@@ -3,9 +3,11 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
 import Navbar from "@/components/Navbar";
-import ReactQueryProvider from "@/components/ReactQueryProvider";
-import ToastProvider from "@/components/ToastProvider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import ToastProvider from "@/providers/ToastProvider";
 import { CartContextProvider } from "@/context/CartContextProvider";
+import AnalyticsProvider from "@/providers/AnalyticsProvider";
+import CookieConsent from "@/components/CookieConsent";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,8 +42,11 @@ export default function RootLayout({
           <CartContextProvider>
             <ToastProvider>
               <ReactQueryProvider>
-                <Navbar />
-                {children}
+                <AnalyticsProvider>
+                  <Navbar />
+                  <CookieConsent />
+                  {children}
+                </AnalyticsProvider>
               </ReactQueryProvider>
             </ToastProvider>
           </CartContextProvider>
