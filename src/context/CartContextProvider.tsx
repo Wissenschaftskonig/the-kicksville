@@ -9,6 +9,7 @@ interface CartItem {
   price: string;
   image: StaticImageData | string;
   quantity: number;
+  color: string;
 }
 
 interface CartContextProps {
@@ -46,7 +47,10 @@ export const CartContextProvider = ({
   const addToCart = (item: CartItem) => {
     setCartItems((currentItems) => {
       const existingItemIndex = currentItems.findIndex(
-        (cartItem) => cartItem.id === item.id && cartItem.size === item.size
+        (cartItem) =>
+          cartItem.id === item.id &&
+          cartItem.size === item.size &&
+          cartItem.color === item.color
       );
 
       let updatedItems;
@@ -65,7 +69,7 @@ export const CartContextProvider = ({
   const removeFromCart = (id: string, size: string) => {
     setCartItems((currentItems) => {
       const updatedItems = currentItems.filter(
-        (item) => !(item.id === id && item.size === size)
+        (item) => !(item.id === id && item.size === size && item.color === item.color)
       );
 
       sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
@@ -76,7 +80,7 @@ export const CartContextProvider = ({
   const updateQuantity = (id: string, size: string, quantity: number) => {
     setCartItems((currentItems) => {
       const updatedItems = currentItems.map((item) =>
-        item.id === id && item.size === size ? { ...item, quantity } : item
+        item.id === id && item.size === size && item.color === item.color ? { ...item, quantity } : item
       );
 
       sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));

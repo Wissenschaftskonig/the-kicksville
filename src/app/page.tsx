@@ -1,6 +1,6 @@
 "use client";
 
-import { MAIN_IMG } from "@/images";
+import {  PRODUCT_THREE } from "@/images";
 import Image from "next/image";
 import "./globals.css";
 import Card from "@/components/Card";
@@ -17,7 +17,7 @@ export default function Home() {
     setTargetTime(new Date("2025-05-01T00:00:00").getTime());
   }, []);
 
-  const [firstItem, ...otherItems] = SALE_ITEMS;
+  const [...otherItems] = SALE_ITEMS;
   return (
     <>
       <main className="overflow-x-hidden flex flex-col items-center justify-center px-4 lg:px-8 py-4">
@@ -25,15 +25,15 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center w-full lg:w-1/2 gap-10">
             <aside className="text-left flex flex-col gap-8">
               <div>
-                <h1 className="text-3xl font-extrabold">Jordan True Flight</h1>
+                <h1 className="text-3xl font-extrabold">Redtech Bottle Water</h1>
                 <h2 className="italic">White Sail, Lightning & Chlorophyll</h2>
               </div>
               <p>
-                {`With a design inspired by the AJ7, the True Flight brings a classic court look to your everyday 'fit. With premium materials, a look that's a breath of fresh air and an inner sleeve for a secure fit, these J's bring versatility to a signature style.`}
+                {`With a design inspired by performance gear, the Redtech Bottle brings a classic, elevated look to your everyday hydration. With premium materials, a sleek silhouette that stands out, and an ergonomic grip for a secure hold, this bottle blends versatility with signature style.`}
               </p>
             </aside>
 
-            {firstItem && (
+            {/* {firstItem && (
               <Card
                 imageSource={firstItem.imageSource}
                 cardTitle={firstItem.cardTitle}
@@ -43,7 +43,7 @@ export default function Home() {
                 discountRate={firstItem.discountRate}
                 discountedPrice={firstItem.discountedPrice}
               />
-            )}
+            )} */}
           </div>
 
           <aside className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6">
@@ -63,7 +63,7 @@ export default function Home() {
             <div className="animate-zoom">
               <Image
                 alt="main product photo"
-                src={MAIN_IMG}
+                src={PRODUCT_THREE}
                 height={500}
                 width={500}
                 className="drop-shadow-customDrop z-10"
@@ -72,15 +72,17 @@ export default function Home() {
           </aside>
         </section>
 
-        <section className="w-full flex flex-col gap-10 items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
-          <div className="text-center space-y-2">
+         <div className="text-center space-y-2">
             <h2 className={`${permanentMarker.className} text-2xl`}>
               Exciting Offers
             </h2>
             <p>Do not miss these amazing deals!</p>
           </div>
 
-          <div className="hidden lg:flex justify-evenly w-full">
+        <section className="w-full flex flex-col gap-10 items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
+         
+
+          <div className="hidden lg:flex gap-2 justify-evenly w-full">
             {otherItems.map((item, index) => (
               <Card
                 key={index}

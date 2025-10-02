@@ -22,11 +22,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Kicksville",
+  title: "Redpay Store",
   description: "Sales platform",
-  icons: {
-    icon: "https://freepngimg.com/thumb/shoes/26593-1-vector-shoes-transparent-image.png",
-  },
 };
 
 export default function RootLayout({

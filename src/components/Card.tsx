@@ -38,7 +38,7 @@ const Card = ({
           alt="product"
           loading="lazy"
           src={imageSource}
-          className="transition-transform duration-500 ease-in-out group-hover:-rotate-[20deg] brightness-100"
+          className="transition-transform duration-500 ease-in-out brightness-100"
         />
       </div>
 
@@ -51,11 +51,11 @@ const Card = ({
 
       <div className="text-sm flex flex-col justify-center items-center gap-5">
         <div className="flex flex-col gap-3">
-          <p className="flex items-center">
-            <span className="flex items-center text-gray-400 line-through">
+          <p className="flex items-center justify-center">
+            {/* <span className="flex items-center text-gray-400 line-through">
               <Icon icon="tabler:currency-naira" className="text-sm" />
               <span className="text-xs">{price}</span>
-            </span>
+            </span> */}
             <span className="flex items-center">
               <Icon icon="tabler:currency-naira" className="text-lg" />
               <span className="text-base font-bold">{discountedPrice}</span>
