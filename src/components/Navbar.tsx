@@ -28,20 +28,20 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg shadow-lg backdrop-blur-[6.8px] border-white/2 sticky top-0 z-50">
-        <div className="hover:-rotate-[20deg] duration-300 transition-all ease-in-out">
+      <nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg h-[78px] shadow-lg backdrop-blur-[6.8px] border-white/2 sticky top-0 z-50">
+        <div className="">
           <Image
             alt="logo"
             src={LOGO}
-            height={70}
-            width={70}
+            height={50}
+            width={50}
             onClick={goHome}
-            className="hover:cursor-pointer brightness-100 contrast-100 rotate-[20deg]"
+            className="hover:cursor-pointer brightness-100 contrast-100"
           />
         </div>
 
         <p className={`${permanentMarker.className} text-3xl hidden md:block`}>
-          KicksVille
+          Redpay Store
         </p>
 
         <div className="flex gap-3 items-center">

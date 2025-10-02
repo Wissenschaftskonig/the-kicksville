@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { SALE_ITEMS, shoeSizes, showToast } from "@/utils";
+import { colors, productSizes, SALE_ITEMS, showToast } from "@/utils";
 import { use, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CustomButton from "@/components/CustomButton";
@@ -18,6 +18,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
   const router = useRouter();
   const [mainPicIndex, setMainPicIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const { addToCart } = useCart();
 
   const { id } = use(params);
@@ -32,12 +33,16 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
     setSelectedSize(size);
   };
 
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+  };
+
   const goBack = () => {
     router.back();
   };
 
   const proceedToCart = () => {
-    if (selectedSize) {
+    if (selectedSize && selectedColor) {
       addToCart({
         id: item.id,
         name: item.cardTitle,
@@ -45,6 +50,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
         price: item.discountedPrice,
         image: item.displayPics[0].pic,
         quantity: 1,
+        color: selectedColor,
       });
 
       showToast("success", `${item.cardTitle} added to cart`);
@@ -88,7 +94,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
         </div>
       </section>
 
-      <section className="flex flex-col w-full items-center m-auto gap-8 lg:gap-10 lg:w-1/2">
+      <section className="flex flex-col w-full items-center m-auto  lg:w-1/2">
         <div className="text-center">
           <h1 className="text-3xl font-extrabold">{item.cardTitle}</h1>
           <h2 className="italic">{item.cardDescription}</h2>
@@ -101,13 +107,40 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
         <div className="">
           <div className="flex justify-between items-center">
             <div className="flex items-end my-4">
+              <h3>Available Colors</h3>
+              <Icon icon={"mdi:chevron-double-down"} className="h-5 w-5" />
+            </div>
+          </div>
+
+          <ul className="grid grid-cols-5 gap-2 md:gap-4">
+            {colors.map((color) => (
+              <CustomButton
+                key={color.color}
+                buttonText={color.color}
+                style={`w-14 text-sm md:w-28 ${
+                  selectedColor === color.color
+                    ? "transition-all ease-in-out bg-gray-500 text-white"
+                    : ""
+                }`}
+                buttonTypeTwo
+                onClick={() => handleColorSelect(color.color)}
+              />
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-black border h-0.5 w-full my-6" />
+
+        <div className="">
+          <div className="flex justify-between items-center">
+            <div className="flex items-end mb-4">
               <h3>Available Sizes</h3>
               <Icon icon={"mdi:chevron-double-down"} className="h-5 w-5" />
             </div>
           </div>
 
           <ul className="grid grid-cols-5 gap-2 md:gap-4">
-            {shoeSizes.map((size) => (
+            {productSizes.map((size) => (
               <CustomButton
                 key={size.num}
                 buttonText={size.num}
@@ -130,7 +163,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
             buttonSize="btn-wide"
             style="text-md font-thin uppercase w-full"
             onClick={proceedToCart}
-            disabled={!selectedSize}
+            disabled={!selectedSize || !selectedColor}
           />
         </div>
       </section>
