@@ -142,15 +142,15 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
           <ul className="grid grid-cols-5 gap-2 md:gap-4">
             {productSizes.map((size) => (
               <CustomButton
-                key={size.num}
-                buttonText={size.num}
+                key={size.size}
+                buttonText={size.size}
                 style={`w-14 text-sm md:w-28 ${
-                  selectedSize === size.num
+                  selectedSize === size.size
                     ? "transition-all ease-in-out bg-gray-500 text-white"
                     : ""
                 }`}
                 buttonTypeTwo
-                onClick={() => handleSizeSelect(size.num)}
+                onClick={() => handleSizeSelect(size.size)}
               />
             ))}
           </ul>

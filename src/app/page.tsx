@@ -68,7 +68,7 @@ export default function Home() {
 								src={PRODUCT_THREE}
 								height={500}
 								width={500}
-								className="drop-shadow-customDrop z-10"
+								className=""
 							/>
 						</div>
 					</aside>
