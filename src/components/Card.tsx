@@ -3,6 +3,8 @@ import Image, { StaticImageData } from "next/image";
 import React from "react";
 import CustomButton from "./CustomButton";
 import { useRouter } from "next/navigation";
+import { SALE_ITEMS } from "@/utils";
+import { useCart } from "@/context/CartContextProvider";
 
 interface CardProps {
 	imageSource: StaticImageData;
@@ -23,10 +25,35 @@ const Card = ({
 	cardId,
 }: CardProps) => {
 	const router = useRouter();
+	const { addToCart } = useCart();
+
+	const item = SALE_ITEMS.find((item) => item.id === cardId);
 
 	const handleCardClick = () => {
-		router.push(`/product/${cardId}`);
+		const cartItems = [
+			"redtech-bottle-water",
+			"redtech-beanie",
+			"redtech-book",
+		];
+
+		if (item?.id && cartItems.includes(item.id)) {
+			addToCart({
+				id: item.id,
+				name: item.cardTitle,
+				price: item.discountedPrice,
+				image: item.displayPics[0].pic,
+				quantity: 1,
+			});
+			router.push("/cart");
+		} else {
+			router.push(`/product/${cardId}`);
+		}
 	};
+
+	if (!item) {
+		return <p>Item not found!</p>;
+	}
+
 	return (
 		<div className="border-2 rounded-md border-black h-[25rem] w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-2">
 			<div className="overflow-hidden">

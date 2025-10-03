@@ -3,116 +3,119 @@ import { StaticImageData } from "next/image";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface CartItem {
-  id: string;
-  name: string;
-  size: string;
-  price: string;
-  image: StaticImageData | string;
-  quantity: number;
-  color: string;
+	id: string;
+	name: string;
+	size?: string;
+	price: string;
+	image: StaticImageData | string;
+	quantity: number;
+	color?: string;
 }
 
 interface CartContextProps {
-  cartItems: CartItem[];
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string, size: string) => void;
-  updateQuantity: (id: string, size: string, quantity: number) => void;
-  clearCart: () => void;
-  calculateTotal: () => number;
+	cartItems: CartItem[];
+	addToCart: (item: CartItem) => void;
+	removeFromCart: (id: string, size: string) => void;
+	updateQuantity: (id: string, size: string, quantity: number) => void;
+	clearCart: () => void;
+	calculateTotal: () => number;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartContextProvider = ({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  useEffect(() => {
-    const savedCartItems = sessionStorage.getItem("cartItems");
-    if (savedCartItems) {
-      setCartItems(JSON.parse(savedCartItems));
-    }
-  }, []);
+	useEffect(() => {
+		const savedCartItems = sessionStorage.getItem("cartItems");
+		if (savedCartItems) {
+			setCartItems(JSON.parse(savedCartItems));
+		}
+	}, []);
 
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => {
-      const price = parseFloat(item.price.replace(/,/g, ""));
-      return total + price * item.quantity;
-    }, 0);
-  };
+	const calculateTotal = () => {
+		return cartItems.reduce((total, item) => {
+			const price = parseFloat(item.price.replace(/,/g, ""));
+			return total + price * item.quantity;
+		}, 0);
+	};
 
-  const addToCart = (item: CartItem) => {
-    setCartItems((currentItems) => {
-      const existingItemIndex = currentItems.findIndex(
-        (cartItem) =>
-          cartItem.id === item.id &&
-          cartItem.size === item.size &&
-          cartItem.color === item.color
-      );
+	const addToCart = (item: CartItem) => {
+		setCartItems((currentItems) => {
+			const existingItemIndex = currentItems.findIndex(
+				(cartItem) =>
+					cartItem.id === item.id ||
+					cartItem.size === item.size ||
+					cartItem.color === item.color
+			);
 
-      let updatedItems;
-      if (existingItemIndex > -1) {
-        updatedItems = [...currentItems];
-        updatedItems[existingItemIndex].quantity += item.quantity;
-      } else {
-        updatedItems = [...currentItems, item];
-      }
+			let updatedItems;
+			if (existingItemIndex > -1) {
+				updatedItems = [...currentItems];
+				updatedItems[existingItemIndex].quantity += item.quantity;
+			} else {
+				updatedItems = [...currentItems, item];
+			}
 
-      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
-  };
+			sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+			return updatedItems;
+		});
+	};
 
-  const removeFromCart = (id: string, size: string) => {
-    setCartItems((currentItems) => {
-      const updatedItems = currentItems.filter(
-        (item) => !(item.id === id && item.size === size && item.color === item.color)
-      );
+	const removeFromCart = (id: string, size: string) => {
+		setCartItems((currentItems) => {
+			const updatedItems = currentItems.filter(
+				(item) =>
+					!(item.id === id || item.size === size || item.color === item.color)
+			);
 
-      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
-  };
+			sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+			return updatedItems;
+		});
+	};
 
-  const updateQuantity = (id: string, size: string, quantity: number) => {
-    setCartItems((currentItems) => {
-      const updatedItems = currentItems.map((item) =>
-        item.id === id && item.size === size && item.color === item.color ? { ...item, quantity } : item
-      );
+	const updateQuantity = (id: string, size: string, quantity: number) => {
+		setCartItems((currentItems) => {
+			const updatedItems = currentItems.map((item) =>
+				item.id === id || item.size === size || item.color === item.color
+					? { ...item, quantity }
+					: item
+			);
 
-      sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      return updatedItems;
-    });
-  };
+			sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
+			return updatedItems;
+		});
+	};
 
-  const clearCart = () => {
-    setCartItems([]);
-    sessionStorage.removeItem("cartItems");
-  };
+	const clearCart = () => {
+		setCartItems([]);
+		sessionStorage.removeItem("cartItems");
+	};
 
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        calculateTotal,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+	return (
+		<CartContext.Provider
+			value={{
+				cartItems,
+				addToCart,
+				removeFromCart,
+				updateQuantity,
+				clearCart,
+				calculateTotal,
+			}}
+		>
+			{children}
+		</CartContext.Provider>
+	);
 };
 
 export const useCart = (): CartContextProps => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
+	const context = useContext(CartContext);
+	if (!context) {
+		throw new Error("useCart must be used within a CartProvider");
+	}
+	return context;
 };

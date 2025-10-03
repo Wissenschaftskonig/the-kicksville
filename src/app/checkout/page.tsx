@@ -1,376 +1,239 @@
 "use client";
-import { useState } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { useMutation } from "@tanstack/react-query";
-import { createVirtualAccount } from "@/actions/createVitrualAccount";
-import {
-  formatAmount,
-  generateCustomerReference,
-  generateExpireAt,
-  getCurrentDate,
-  getTomorrowDate,
-  showToast,
-} from "@/utils";
-import { verifyTransaction } from "@/actions/verifyTransaction";
-import CustomButton from "@/components/CustomButton";
-import Loader from "@/components/Loader";
-import { useCart } from "@/context/CartContextProvider";
 
-const paymentMethods = [
-  {
-    id: "card",
-    title: "Card Payment",
-    icon: "material-symbols:credit-card",
-    description: "Pay with Debit/Credit Card",
-  },
-  {
-    id: "ussd",
-    title: "USSD",
-    icon: "heroicons:device-phone-mobile",
-    description: "Pay using USSD code",
-  },
-  {
-    id: "transfer",
-    title: "Bank Transfer",
-    icon: "mingcute:transfer-fill",
-    description: "Pay via Bank Transfer",
-  },
-];
+import { useFormik } from "formik";
+import { useState } from "react";
 
 export default function Checkout() {
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-  const [step, setStep] = useState(1);
-  const [customerInfo, setCustomerInfo] = useState({
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-  });
-  const { calculateTotal, clearCart } = useCart();
+	const [step, setStep] = useState(1);
+	// ✅ Merchant type
+	interface Merchant {
+		merchantId: number;
+		email: string;
+		currency: "NGN" | "USD";
+		invoiceAmount: string;
+		description: string;
+	}
 
-  const { mutate: CreateAccountMutation, data } = useMutation({
-    mutationFn: createVirtualAccount,
-    onSuccess: (data) => {
-      showToast("success", data.message);
-      console.log(data);
-    },
-    onError: (error: Error) => {
-      showToast("error", error.message);
-    },
-  });
+	const [merchant, setMerchant] = useState<Merchant | null>(null);
 
-  const { mutate: VerifyStatusMutation, isPending } = useMutation({
-    mutationFn: verifyTransaction,
-    onSuccess: (data) => {
-      showToast("success", data.message);
-      setStep(3);
-      clearCart();
+	interface FormValues {
+		email: string;
+		currency: string;
+		invoice: string;
+		description: string;
+	}
 
-      console.log(data);
-    },
-    onError: (error: Error) => {
-      showToast("error", error.message);
-    },
-  });
+	type FormErrors = Partial<Record<keyof FormValues, string>>;
 
-  const accountData = data?.data?.provider_response;
+	const validate = (values: FormValues): FormErrors => {
+		const errors: FormErrors = {};
 
-  const mockRequestData = {
-    bvn: "09871545171",
-    firstName: "James",
-    lastName: "May",
-    middleName: "Joseph",
-    accountName: `KicksVille - ${customerInfo.fullName}`,
-    email: "james@gmail.com",
-    phone: "08101827000",
-    productType: "TTO",
-    customerReference: generateCustomerReference(),
-    expireAt: generateExpireAt(),
-    singleDepositLimit: calculateTotal().toString(),
-    merchant: {
-      code: "A33E0",
-    },
-  };
+		if (!values.email) {
+			errors.email = "Required";
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+			errors.email = "Invalid email address";
+		}
 
-  console.log(mockRequestData);
+		if (!values.currency) {
+			errors.currency = "Required";
+		}
 
-  const mockResponse = {
-    vNUBAN: accountData?.virtualAccount?.vNUBAN,
-    startDate: getCurrentDate(),
-    endDate: getTomorrowDate(),
-  };
+		if (!values.invoice) {
+			errors.invoice = "Required";
+		} else if (isNaN(Number(values.invoice))) {
+			errors.invoice = "Invoice must be a number";
+		} else if (values.invoice.length > 20) {
+			errors.invoice = "Must be 20 characters or less";
+		}
 
-  console.log(mockResponse);
+		if (!values.description) {
+			errors.description = "Required";
+		} else if (values.description.length > 100) {
+			errors.description = "Must be 100 characters or less";
+		}
 
-  const handleVerifyPayment = () => {
-    VerifyStatusMutation(mockResponse);
-  };
+		return errors;
+	};
 
-  const handleMethodSelect = (methodId: string) => {
-    if (methodId === "transfer" && selectedMethod !== "transfer") {
-      CreateAccountMutation(mockRequestData);
-    }
-    setSelectedMethod(methodId);
-  };
+	const formik = useFormik<FormValues>({
+		initialValues: {
+			email: "",
+			currency: "",
+			invoice: "",
+			description: "",
+		},
+		validate,
+		onSubmit: (values) => {
+			// Generate merchant object
+			const merchantData: Merchant = {
+				merchantId: 1,
+				email: values.email,
+				currency: values.currency as "NGN" | "USD",
+				invoiceAmount: values.invoice,
+				description: values.description,
+			};
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStep(2);
-  };
+			setMerchant(merchantData);
+			console.log("Merchant Created ✅", merchantData);
 
-  return (
-    <>
-      <main className="px-4 lg:px-8 max-w-4xl mx-auto">
-        {step === 1 && (
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold mb-4">Customer Information</h1>
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-              <div className="relative">
-                <Icon
-                  icon="mdi:account-outline"
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"
-                />
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={customerInfo.fullName}
-                  onChange={(e) =>
-                    setCustomerInfo({
-                      ...customerInfo,
-                      fullName: e.target.value,
-                    })
-                  }
-                  required
-                  className="w-full p-3 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500 font-semibold"
-                />
-              </div>
+			setStep(2); // move to step 2
+		},
+	});
 
-              <div className="relative">
-                <Icon
-                  icon="mdi:email-outline"
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  value={customerInfo.email}
-                  onChange={(e) =>
-                    setCustomerInfo({ ...customerInfo, email: e.target.value })
-                  }
-                  required
-                  className="w-full p-3 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500 font-semibold"
-                />
-              </div>
+	return (
+		<div className="flex items-center justify-center w-full h-[calc(100vh-78px)]">
+			{step === 1 && (
+				<div className="bg-white shadow-md drop-shadow-md rounded-lg border w-[27%] p-5">
+					<h1 className="font-semibold">Request Payment</h1>
+					<p className="mt-2 md:w-[80%] text-sm text-gray-600 font-medium">
+						Enter amount, description and request payment from client.
+					</p>
 
-              <div className="relative">
-                <Icon
-                  icon="mdi:phone-outline"
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={customerInfo.phoneNumber}
-                  onChange={(e) =>
-                    setCustomerInfo({
-                      ...customerInfo,
-                      phoneNumber: e.target.value,
-                    })
-                  }
-                  required
-                  className="w-full p-3 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500 font-semibold"
-                />
-              </div>
-              <CustomButton
-                buttonText="Proceed to Payment Options"
-                buttonTypeOne
-                style="uppercase text-md font-thin w-full"
-              />
-            </form>
-          </div>
-        )}
+					<form
+						onSubmit={formik.handleSubmit}
+						className="flex flex-col gap-5 mt-4"
+					>
+						<div className="space-y-2">
+							<label htmlFor="email" className="text-[#81909D] text-xs">
+								Customer Email
+							</label>
+							<input
+								type="text"
+								name="email"
+								value={formik.values.email}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								className={`rounded-lg border py-2.5 px-3 w-full h-11 ${
+									formik.touched.email && formik.errors.email
+										? "border-red-500"
+										: "border-[#81909D]"
+								}`}
+							/>
+							{formik.errors.email && (
+								<p className="text-red-500 text-xs">{formik.errors.email}</p>
+							)}
+						</div>
 
-        {step === 2 && (
-          <>
-            <div className="mb-2">
-              <h1 className="text-2xl font-bold mb-2">Checkout</h1>
-              <p className="text-gray-600">
-                Choose your preferred payment method
-              </p>
-            </div>
+						<div className="space-y-2">
+							<label htmlFor="currency" className="text-[#81909D] text-xs">
+								Currency
+							</label>
+							<select
+								id="currency"
+								name="currency"
+								value={formik.values.currency}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								className={`rounded-lg border py-2.5 px-3 w-full h-11 bg-white ${
+									formik.touched.currency && formik.errors.currency
+										? "border-red-500"
+										: "border-[#81909D]"
+								}`}
+							>
+								<option value="">Select currency</option>
+								<option value="NGN">Naira (₦)</option>
+								<option value="USD">USD ($)</option>
+							</select>
+						</div>
 
-            <div className="space-y-2">
-              <div className="grid gap-4">
-                {paymentMethods.map((method) => (
-                  <button
-                    key={method.id}
-                    onClick={() => handleMethodSelect(method.id)}
-                    className={`
-                  flex items-center p-4 rounded-lg border transition-all ease-in-out duration-200
-                  ${
-                    selectedMethod === method.id
-                      ? "border-black bg-black text-white"
-                      : "border-gray-300 dark:border-zinc-500 hover:border-gray-400"
-                  }
-                `}
-                  >
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="p-2 bg-gray-100 rounded-full">
-                        <Icon
-                          icon={method.icon}
-                          className={`h-6 w-6 ${
-                            selectedMethod === method.id
-                              ? "text-black"
-                              : "text-gray-600"
-                          }`}
-                        />
-                      </div>
-                      <div className="text-left">
-                        <h3 className="font-semibold">{method.title}</h3>
-                        <p
-                          className={`text-sm ${
-                            selectedMethod === method.id
-                              ? "text-gray-200"
-                              : "text-gray-500"
-                          }`}
-                        >
-                          {method.description}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <div
-                        className={`
-                    w-5 h-5 rounded-full border-2
-                    ${
-                      selectedMethod === method.id
-                        ? "border-white"
-                        : "border-gray-300 dark:border-zinc-500"
-                    }
-                    flex items-center justify-center
-                  `}
-                      >
-                        {selectedMethod === method.id && (
-                          <div className="w-3 h-3 rounded-full bg-white" />
-                        )}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
+						<div className="space-y-2">
+							<label htmlFor="invoice" className="text-[#81909D] text-xs">
+								Invoice Amount
+							</label>
+							<input
+								type="text"
+								name="invoice"
+								placeholder="₦"
+								value={formik.values.invoice}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								className={`rounded-lg border py-2.5 px-3 w-full h-11 ${
+									formik.touched.invoice && formik.errors.invoice
+										? "border-red-500"
+										: "border-[#81909D]"
+								}`}
+							/>
+							{formik.errors.invoice && (
+								<p className="text-red-500 text-xs">{formik.errors.invoice}</p>
+							)}
+						</div>
 
-              {selectedMethod && (
-                <div className="mt-8 space-y-4">
-                  {selectedMethod === "card" && (
-                    <div className="p-6 border border-gray-300 dark:border-zinc-500 rounded-lg space-y-4">
-                      <h3 className="font-semibold mb-4">Card Details</h3>
-                      <div className="space-y-4">
-                        <input
-                          type="text"
-                          placeholder="Card Number"
-                          className="w-full p-3 border rounded-lg"
-                        />
-                        <div className="grid grid-cols-2 gap-4">
-                          <input
-                            type="text"
-                            placeholder="MM/YY"
-                            className="w-full p-3 border rounded-lg"
-                          />
-                          <input
-                            type="text"
-                            placeholder="CVV"
-                            className="w-full p-3 border rounded-lg"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {selectedMethod === "transfer" && (
-                    <div className="p-6 border border-gray-300 dark:border-zinc-500 rounded-lg space-y-4">
-                      <h3 className="font-semibold mb-2">
-                        Bank Transfer Details
-                      </h3>
+						<div className="space-y-2">
+							<label htmlFor="description" className="text-[#81909D] text-xs">
+								Description
+							</label>
+							<input
+								type="text"
+								name="description"
+								value={formik.values.description}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								className={`rounded-lg border py-2.5 px-3 w-full h-11 ${
+									formik.touched.description && formik.errors.description
+										? "border-red-500"
+										: "border-[#81909D]"
+								}`}
+							/>
+							{formik.errors.description && (
+								<p className="text-red-500 text-xs">
+									{formik.errors.description}
+								</p>
+							)}
+						</div>
 
-                      {accountData === undefined ? (
-                        <Loader loaderSize="loading-lg" />
-                      ) : (
-                        <div className="space-y-2 text-sm">
-                          <p>Bank Name: United Bank for Africa</p>
-                          <p>
-                            Account Number:{" "}
-                            {accountData?.virtualAccount?.vNUBAN}
-                          </p>
-                          <p>
-                            Account Name:{" "}
-                            {accountData?.virtualAccount?.accountName}
-                          </p>
-                          <p>
-                            Amount:{" "}
-                            {accountData?.virtualAccount?.singleDepositLimit !==
-                            undefined
-                              ? `₦${formatAmount(
-                                  accountData.virtualAccount.singleDepositLimit
-                                )}`
-                              : "N/A"}
-                          </p>
-                        </div>
-                      )}
+						<button
+							type="submit"
+							className="text-white bg-[#C80000] rounded-lg py-2.5 px-3 w-full h-11"
+						>
+							Submit
+						</button>
+					</form>
+				</div>
+			)}
 
-                      <p className="text-sm text-red-600 mt-4 font-bold uppercase">
-                        Please transfer the exact amount
-                      </p>
-                    </div>
-                  )}
-                  {selectedMethod === "ussd" && (
-                    <div className="p-6 border border-gray-300 dark:border-zinc-500 rounded-lg space-y-4">
-                      <h3 className="font-semibold mb-4">USSD Payment</h3>
-                      <div className="bg-gray-200 p-4 rounded-lg text-center">
-                        <p className="text-lg font-mono">*919#</p>
-                      </div>
-                      <p className="text-sm text-gray-500">
-                        Dial the USSD code above on your phone to complete
-                        payment
-                      </p>
-                    </div>
-                  )}
-                  <CustomButton
-                    buttonText={
-                      isPending ? (
-                        <Loader bodyStyle="bg-transparent" />
-                      ) : (
-                        "Complete Payment"
-                      )
-                    }
-                    buttonTypeOne
-                    style="uppercase text-md font-thin w-full"
-                    onClick={handleVerifyPayment}
-                    disabled={isPending || selectedMethod !== "transfer"}
-                  />
-                </div>
-              )}
-            </div>
-          </>
-        )}
+			{step === 2 && merchant && (
+				<div className="bg-white shadow-md drop-shadow-md rounded-lg border w-[27%] p-5">
+					{/* <h1 className="font-semibold mb-4">Merchant Created ✅</h1>
+					<p className="text-sm text-gray-600">
+						<strong>ID:</strong> {merchant.merchantId}
+					</p>
+					<p className="text-sm text-gray-600">
+						<strong>Email:</strong> {merchant.email}
+					</p>
+					<p className="text-sm text-gray-600">
+						<strong>Currency:</strong> {merchant.currency}
+					</p>
+					<p className="text-sm text-gray-600">
+						<strong>Invoice:</strong> {merchant.invoiceAmount}
+					</p>
+					<p className="text-sm text-gray-600">
+						<strong>Description:</strong> {merchant.description}
+					</p> */}
+					<h1 className="text-lg font-semibold">Review</h1>
+					<div className="text-gray-400 font-medium">
+						You are about to request the sum of{" "}
+						<span className="font-black text-gray-600">
+							₦{merchant.invoiceAmount}
+						</span>{" "}
+						from{" "}
+						<span className="font-black text-gray-600">{merchant.email}</span>
+					</div>
 
-        {step === 3 && (
-          <div className="flex flex-col justify-center items-center h-[70vh] gap-8">
-            <Icon
-              icon="icon-park-twotone:success"
-              className="h-40 w-40 text-green-400"
-            />
-            <div className="text-center">
-              <p className="text-4xl font-bold uppercase my-2">
-                Order Confirmed
-              </p>
-              <p className="text-xl font-thin text-gray-500 uppercase mb-2">
-                Thanks for your patronage
-              </p>
-              <p className="text-xl font-bold capitalize">
-                {customerInfo.fullName}
-              </p>
-            </div>
-          </div>
-        )}
-      </main>
-    </>
-  );
+					<button
+						onClick={() => setStep(1)}
+						className="mt-6 bg-red-500 text-white rounded-lg py-2.5 px-3 w-full h-11"
+					>
+						Send Request
+					</button>
+
+					<button
+						onClick={() => setStep(1)}
+						className="mt-4 text-[#C80000] border border-[#C80000] rounded-lg py-2.5 px-3 w-full h-11"
+					>
+						Edit Request
+					</button>
+				</div>
+			)}
+		</div>
+	);
 }
