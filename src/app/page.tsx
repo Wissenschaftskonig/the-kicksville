@@ -8,7 +8,6 @@ import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "./fliptimer.css";
 import { useEffect, useState } from "react";
 import { SALE_ITEMS } from "@/utils";
-import { permanentMarker } from "@/components/Navbar";
 
 export default function Home() {
 	const [targetTime, setTargetTime] = useState<number | null>(null);
@@ -28,7 +27,6 @@ export default function Home() {
 								<h1 className="text-3xl font-extrabold">
 									Redtech Bottle Water
 								</h1>
-								<h2 className="italic">White Sail, Lightning & Chlorophyll</h2>
 							</div>
 							<p>
 								{`With a design inspired by performance gear, the Redtech Bottle brings a classic, elevated look to your everyday hydration. With premium materials, a sleek silhouette that stands out, and an ergonomic grip for a secure hold, this bottle blends versatility with signature style.`}
@@ -75,9 +73,7 @@ export default function Home() {
 				</section>
 
 				<div className="text-center space-y-2">
-					<h2 className={`${permanentMarker.className} text-2xl`}>
-						Exciting Offers
-					</h2>
+					<h2 className={`text-2xl`}>Exciting Offers</h2>
 					<p>Do not miss these amazing deals!</p>
 				</div>
 
@@ -88,9 +84,7 @@ export default function Home() {
 								key={index}
 								imageSource={item.imageSource}
 								cardTitle={item.cardTitle}
-								cardDescription={item.cardDescription}
-								discountRate={item.discountRate}
-								discountedPrice={item.discountedPrice}
+								price={item.price}
 								cardId={item.id}
 							/>
 						))}
@@ -102,9 +96,7 @@ export default function Home() {
 								<Card
 									imageSource={item.imageSource}
 									cardTitle={item.cardTitle}
-									cardDescription={item.cardDescription}
-									discountRate={item.discountRate}
-									discountedPrice={item.discountedPrice}
+									price={item.price}
 									cardId={item.id}
 								/>
 							</div>
