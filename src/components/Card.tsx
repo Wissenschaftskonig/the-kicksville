@@ -9,21 +9,12 @@ import { useCart } from "@/context/CartContextProvider";
 interface CardProps {
 	imageSource: StaticImageData;
 	cardTitle: string;
-	cardDescription: string;
 	onButtonClick?: () => void;
-	discountedPrice: string;
-	discountRate: string;
+	price: string;
 	cardId: string;
 }
 
-const Card = ({
-	imageSource,
-	cardTitle,
-	cardDescription,
-	discountedPrice,
-	discountRate,
-	cardId,
-}: CardProps) => {
+const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 	const router = useRouter();
 	const { addToCart } = useCart();
 
@@ -40,7 +31,7 @@ const Card = ({
 			addToCart({
 				id: item.id,
 				name: item.cardTitle,
-				price: item.discountedPrice,
+				price: item.price,
 				image: item.displayPics[0].pic,
 				quantity: 1,
 			});
@@ -55,7 +46,7 @@ const Card = ({
 	}
 
 	return (
-		<div className="border-2 rounded-md border-black h-[25rem] w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-2">
+		<div className="border-2 rounded-md border-black h-[21rem] w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-2">
 			<div className="overflow-hidden">
 				<Image
 					height={250}
@@ -69,7 +60,6 @@ const Card = ({
 
 			<div>
 				<p className="font-semibold">{cardTitle}</p>
-				<p className="text-xs italic">{cardDescription}</p>
 			</div>
 
 			<div className="divider px-2 text-gray-600"></div>
@@ -79,16 +69,9 @@ const Card = ({
 					<p className="flex items-center justify-center">
 						<span className="flex items-center">
 							<Icon icon="tabler:currency-naira" className="text-lg" />
-							<span className="text-base font-bold">{discountedPrice}</span>
+							<span className="text-base font-bold">{price}</span>
 						</span>
 					</p>
-
-					<div>
-						<p>
-							Enjoy <span className="text-red-600">{discountRate}%</span> off!
-						</p>
-						<span>Offer valid till May 1.</span>
-					</div>
 				</div>
 
 				<CustomButton

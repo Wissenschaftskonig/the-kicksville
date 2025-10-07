@@ -47,7 +47,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 				id: item.id,
 				name: item.cardTitle,
 				size: selectedSize,
-				price: item.discountedPrice,
+				price: item.price,
 				image: item.displayPics[0].pic,
 				quantity: 1,
 				color: selectedColor,
@@ -97,10 +97,9 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 			<section className="flex flex-col w-full items-center m-auto  lg:w-1/2">
 				<div className="text-center">
 					<h1 className="text-3xl font-extrabold">{item.cardTitle}</h1>
-					<h2 className="italic">{item.cardDescription}</h2>
 					<span className="flex items-center justify-center">
 						<Icon icon="tabler:currency-naira" className="text-xl" />
-						<span className="text-base font-bold">{item.discountedPrice}</span>
+						<span className="text-base font-bold">{item.price}</span>
 					</span>
 				</div>
 
