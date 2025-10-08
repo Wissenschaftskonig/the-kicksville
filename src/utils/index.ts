@@ -156,6 +156,8 @@ export const SALE_ITEMS = [
 		cardTitle: "Redtech Beanie",
 		price: "200",
 		displayPics: slideShow,
+		description:
+			"Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
 	},
 	{
 		id: "redtech-sweatshirt",
@@ -163,6 +165,8 @@ export const SALE_ITEMS = [
 		cardTitle: "Redtech Sweatshirt",
 		price: "500",
 		displayPics: slideShowTwo,
+		description:
+			"Engineered for performance and comfort, the Redtech Sweatshirt combines premium cotton-blend fabric with a streamlined fit. Its breathable, midweight design makes it perfect for layering, while the subtle Redtech branding delivers a confident, understated edge. Ideal for both active days and downtime.",
 	},
 	{
 		id: "redtech-bottle-water",
@@ -170,6 +174,8 @@ export const SALE_ITEMS = [
 		cardTitle: "Redtech Bottle Water",
 		price: "200",
 		displayPics: slideShowThree,
+		description:
+			"Elevate your hydration with the Redtech Bottle Water, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
 	},
 	{
 		id: "redtech-book",
@@ -177,6 +183,8 @@ export const SALE_ITEMS = [
 		cardTitle: "Redtech Book",
 		price: "200",
 		displayPics: slideShowFour,
+		description:
+			"The Redtech Book is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
 	},
 	{
 		id: "redtech-shirt",
@@ -184,6 +192,8 @@ export const SALE_ITEMS = [
 		cardTitle: "Redtech Shirt",
 		price: "200",
 		displayPics: slideShowFive,
+		description:
+			"Crafted for precision and comfort, the Redtech Shirt blends lightweight fabric with a refined fit that moves with you. Whether for work, casual outings, or creative sessions, it embodies the Redtech balance of performance and style — where simplicity meets substance.",
 	},
 ];
 

@@ -16,7 +16,7 @@ interface ProductDetailsParams {
 
 export default function ProductDetails({ params }: ProductDetailsParams) {
 	const router = useRouter();
-	const [mainPicIndex, setMainPicIndex] = useState(0);
+	const [mainPicIndex] = useState(0);
 	const [selectedSize, setSelectedSize] = useState<string | undefined>();
 	const [selectedColor, setSelectedColor] = useState<string | undefined>();
 	const { addToCart } = useCart();
@@ -69,21 +69,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 				className="h-10 w-10 absolute top-[28rem] left-4 md:top-4 lg:left-8 z-10"
 			/>
 
-			<section className="flex w-full lg:w-1/2 justify-center">
-				<div>
-					{item.displayPics.map((item, index) => (
-						<Image
-							key={index}
-							src={item.pic}
-							alt="display images"
-							loading="lazy"
-							onMouseEnter={() => setMainPicIndex(index)}
-							height={85}
-							width={85}
-						/>
-					))}
-				</div>
-
+			<section className="flex w-full lg:w-1/2 ml-10">
 				<div>
 					<Image
 						src={item.displayPics[mainPicIndex].pic}
@@ -96,11 +82,17 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 
 			<section className="flex flex-col w-full items-center m-auto  lg:w-1/2">
 				<div className="text-center">
-					<h1 className="text-3xl font-extrabold">{item.cardTitle}</h1>
-					<span className="flex items-center justify-center">
-						<Icon icon="tabler:currency-naira" className="text-xl" />
-						<span className="text-base font-bold">{item.price}</span>
-					</span>
+					<div className="flex items-center gap-1 justify-center">
+						<h1 className="text-3xl font-extrabold">{item.cardTitle}</h1>(
+						<span className="flex items-center justify-center text-3xl">
+							<Icon icon="tabler:currency-naira" className="" />
+							<span className="text-xl font-bold">{item.price}</span>
+						</span>
+						)
+					</div>
+					<p className="text-md font-medium text-left mt-2">
+						{item.description}
+					</p>
 				</div>
 
 				<div className="">

@@ -1,6 +1,6 @@
 "use client";
 
-import { PRODUCT_THREE } from "@/images";
+import { POS } from "@/images";
 import Image from "next/image";
 import "./globals.css";
 import Card from "@/components/Card";
@@ -25,25 +25,22 @@ export default function Home() {
 						<aside className="text-left flex flex-col gap-8">
 							<div>
 								<h1 className="text-3xl font-extrabold">
-									Redtech Bottle Water
+									Redtech Checkout System
 								</h1>
 							</div>
 							<p>
-								{`With a design inspired by performance gear, the Redtech Bottle brings a classic, elevated look to your everyday hydration. With premium materials, a sleek silhouette that stands out, and an ergonomic grip for a secure hold, this bottle blends versatility with signature style.`}
+								{`Built with precision and performance in mind, the Redtech Checkout System delivers a seamless, reliable payment experience for every transaction. Designed for speed, security, and user confidence, it integrates modern payment gateways, real-time verification, and smart session management into one cohesive flow. With a clean, intuitive interface and robust backend logic, Redtech Checkout ensures that every purchase — from cart to confirmation — happens effortlessly and securely. It’s more than a payment solution; it’s a refined approach to digital transactions.`}
 							</p>
 						</aside>
 
 						{/* {firstItem && (
-              <Card
-                imageSource={firstItem.imageSource}
-                cardTitle={firstItem.cardTitle}
-                cardDescription={firstItem.cardDescription}
-                cardId={firstItem.id}
-                price={firstItem.price}
-                discountRate={firstItem.discountRate}
-                discountedPrice={firstItem.discountedPrice}
-              />
-            )} */}
+							<Card
+								imageSource={firstItem.imageSource}
+								cardTitle={firstItem.cardTitle}
+								cardId={firstItem.id}
+								price={firstItem.price}
+							/>
+						)} */}
 					</div>
 
 					<aside className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6">
@@ -63,7 +60,7 @@ export default function Home() {
 						<div className="animate-zoom">
 							<Image
 								alt="main product photo"
-								src={PRODUCT_THREE}
+								src={POS}
 								height={500}
 								width={500}
 								className=""
@@ -72,12 +69,12 @@ export default function Home() {
 					</aside>
 				</section>
 
-				<div className="text-center space-y-2">
+				<div className="text-center space-y-2 lg:mt-0 mt-7">
 					<h2 className={`text-2xl`}>Exciting Offers</h2>
 					<p>Do not miss these amazing deals!</p>
 				</div>
 
-				<section className="w-full flex flex-col gap-10 items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
+				<section className="w-full flex flex-col gap-10 lg:items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
 					<div className="hidden lg:flex gap-2 justify-evenly w-full">
 						{otherItems.map((item, index) => (
 							<Card
@@ -90,9 +87,9 @@ export default function Home() {
 						))}
 					</div>
 
-					<div className="lg:hidden carousel carousel-center max-w-sm space-x-6 p-4">
+					<div className="lg:hidden grid grid-cols-2 gap-4 mt-[790px]">
 						{otherItems.map((item, index) => (
-							<div key={index} className="carousel-item">
+							<div key={index} className="">
 								<Card
 									imageSource={item.imageSource}
 									cardTitle={item.cardTitle}
