@@ -63,7 +63,7 @@ export default function Home() {
 								src={checkoutFlow}
 								height={500}
 								width={500}
-								className="rounded-2xl hidden lg:block"
+								className="rounded-2xl hidden lg:block animate-zoom"
 							/>
 							<Image
 								src={checkoutFlow}
