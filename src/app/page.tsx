@@ -1,6 +1,5 @@
 "use client";
 
-import { POS, POS2 } from "@/images";
 import Image from "next/image";
 import "./globals.css";
 import Card from "@/components/Card";
@@ -8,6 +7,7 @@ import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "./fliptimer.css";
 import { useEffect, useState } from "react";
 import { SALE_ITEMS } from "@/utils";
+import { paymentImage } from "@/images";
 
 export default function Home() {
 	const [targetTime, setTargetTime] = useState<number | null>(null);
@@ -60,16 +60,16 @@ export default function Home() {
 						<div className="">
 							<Image
 								alt="main product photo"
-								src={POS}
+								src={paymentImage}
 								height={500}
 								width={500}
 								className="rounded-2xl hidden lg:block"
 							/>
 							<Image
-								src={POS2}
+								src={paymentImage}
 								alt="main product photo"
-								height={500}
-								width={500}
+								height={300}
+								width={300}
 								className="rounded-2xl lg:hidden animate-zoom"
 							/>
 						</div>

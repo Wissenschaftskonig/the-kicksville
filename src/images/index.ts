@@ -16,8 +16,7 @@ import PRODUCT_TWO from "./PRODUCT_TWO.jpg";
 import PRODUCT_THREE from "./PRODUCT_THREE.jpg";
 import PRODUCT_FOUR from "./PRODUCT_FOUR.jpg";
 import PRODUCT_FIVE from "./PRODUCT_FIVE.jpg";
-import POS from "./pos.jpg";
-import POS2 from "./pos2.jpg";
+import paymentImage from "./payment-gateway-small-2.png";
 
 export {
 	LOGO,
@@ -38,6 +37,5 @@ export {
 	PRODUCT_THREE,
 	PRODUCT_FOUR,
 	PRODUCT_FIVE,
-	POS,
-	POS2,
+	paymentImage,
 };
