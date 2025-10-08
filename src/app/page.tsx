@@ -66,8 +66,8 @@ export default function Home() {
 							<Image
 								src={checkoutFlow}
 								alt="main product photo"
-								height={300}
-								width={300}
+								height={500}
+								width={500}
 								className="rounded-2xl lg:hidden animate-zoom"
 							/>
 						</div>
@@ -79,8 +79,8 @@ export default function Home() {
 					<p>Do not miss these amazing deals!</p>
 				</div>
 
-				<section className="w-full flex flex-col gap-10 lg:items-center justify-center lg:flex-row h-[90dvh] lg:h-[68dvh]">
-					<div className="hidden lg:flex gap-2 justify-evenly w-full">
+				<section className="w-full flex flex-col gap-10 lg:items-center justify-center lg:flex-row ">
+					<div className="hidden lg:flex gap-2 justify-evenly w-full mt-10">
 						{otherItems.map((item, index) => (
 							<Card
 								key={index}
@@ -92,7 +92,7 @@ export default function Home() {
 						))}
 					</div>
 
-					<div className="lg:hidden grid grid-cols-2 gap-4 mt-[790px]">
+					<div className="lg:hidden grid grid-cols-2 gap-4 mt-10">
 						{otherItems.map((item, index) => (
 							<div key={index} className="">
 								<Card

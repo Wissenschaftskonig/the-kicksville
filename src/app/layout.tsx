@@ -33,7 +33,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={centuryGothic.className}>
+		<html lang="en" className={centuryGothic.variable}>
 			<head>
 				<script
 					async
