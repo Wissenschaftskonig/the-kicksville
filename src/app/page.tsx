@@ -7,7 +7,7 @@ import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
 import "./fliptimer.css";
 import { useEffect, useState } from "react";
 import { SALE_ITEMS } from "@/utils";
-import { paymentImage } from "@/images";
+import { checkoutFlow } from "@/images";
 
 export default function Home() {
 	const [targetTime, setTargetTime] = useState<number | null>(null);
@@ -60,13 +60,13 @@ export default function Home() {
 						<div className="">
 							<Image
 								alt="main product photo"
-								src={paymentImage}
+								src={checkoutFlow}
 								height={500}
 								width={500}
 								className="rounded-2xl hidden lg:block"
 							/>
 							<Image
-								src={paymentImage}
+								src={checkoutFlow}
 								alt="main product photo"
 								height={300}
 								width={300}

@@ -16,7 +16,7 @@ import PRODUCT_TWO from "./PRODUCT_TWO.jpg";
 import PRODUCT_THREE from "./PRODUCT_THREE.jpg";
 import PRODUCT_FOUR from "./PRODUCT_FOUR.jpg";
 import PRODUCT_FIVE from "./PRODUCT_FIVE.jpg";
-import paymentImage from "./payment-gateway-small-2.png";
+import checkoutFlow from "./checkoutFlow-1-2048x1189.png";
 
 export {
 	LOGO,
@@ -37,5 +37,5 @@ export {
 	PRODUCT_THREE,
 	PRODUCT_FOUR,
 	PRODUCT_FIVE,
-	paymentImage,
+	checkoutFlow,
 };
