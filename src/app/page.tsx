@@ -24,12 +24,10 @@ export default function Home() {
 					<div className="flex flex-col justify-center items-center w-full lg:w-1/2 gap-10">
 						<aside className="text-left flex flex-col gap-8">
 							<div>
-								<h1 className="text-3xl font-extrabold">
-									Redtech Checkout System
-								</h1>
+								<h1 className="text-3xl font-black">Redtech Checkout System</h1>
 							</div>
 							<p>
-								{`Built with precision and performance in mind, the Redtech Checkout System delivers a seamless, reliable payment experience for every transaction. Designed for speed, security, and user confidence, it integrates modern payment gateways, real-time verification, and smart session management into one cohesive flow. With a clean, intuitive interface and robust backend logic, Redtech Checkout ensures that every purchase — from cart to confirmation — happens effortlessly and securely. It’s more than a payment solution; it’s a refined approach to digital transactions.`}
+								{`Built for precision, performance, and trust, the Redtech Checkout System delivers a flawless payment experience from start to finish. Engineered for speed, security, and reliability, it seamlessly connects modern payment gateways with real time verification and intelligent session management. The result is a smooth, confident transaction process that feels effortless for users and powerful for businesses. With its elegant interface and advanced backend architecture, Redtech Checkout transforms online payments into a fast, secure, and seamless experience, redefining what it means to pay with confidence.`}
 							</p>
 						</aside>
 
@@ -77,11 +75,11 @@ export default function Home() {
 				</section>
 
 				<div className="text-center space-y-2 lg:mt-0 mt-7">
-					<h2 className={`text-2xl`}>Exciting Offers</h2>
+					<h2 className={`text-2xl font-black`}>Exciting Offers</h2>
 					<p>Do not miss these amazing deals!</p>
 				</div>
 
-				<section className="w-full flex flex-col gap-10 lg:items-center justify-center lg:flex-row h-[90dvh] lg:h-[88dvh]">
+				<section className="w-full flex flex-col gap-10 lg:items-center justify-center lg:flex-row h-[90dvh] lg:h-[68dvh]">
 					<div className="hidden lg:flex gap-2 justify-evenly w-full">
 						{otherItems.map((item, index) => (
 							<Card

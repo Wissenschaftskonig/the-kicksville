@@ -143,7 +143,6 @@ export default function CartPage() {
 									<div>
 										<h2 className="text-xl font-semibold">{item.name}</h2>
 										{item.size && <p>Size: {item.size}</p>}
-										{item.color && <p>Color: {item.color}</p>}
 										{item.price && <p>Price: ₦{item.price}</p>}
 									</div>
 								</div>

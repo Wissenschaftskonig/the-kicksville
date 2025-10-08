@@ -9,7 +9,6 @@ interface CartItem {
 	price: string;
 	image: StaticImageData | string;
 	quantity: number;
-	color?: string;
 }
 
 interface CartContextProps {

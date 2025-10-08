@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
 import Navbar from "@/components/Navbar";
@@ -10,14 +10,16 @@ import AnalyticsProvider from "@/providers/AnalyticsProvider";
 import CookieConsent from "@/components/CookieConsent";
 import AnalyticsLayout from "./layouts/analytics-layout";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+const centuryGothic = localFont({
+	src: [
+		{
+			path: "./fonts/centurygothic.ttf",
+			weight: "400",
+			style: "normal",
+		},
+	],
+	variable: "--font-century-gothic",
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,16 +33,14 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={centuryGothic.className}>
 			<head>
 				<script
 					async
 					src="https://redpay-sdk-js.s3.eu-west-2.amazonaws.com/omni-payment-gateway-sdk.js"
 				></script>
 			</head>
-			<body
-				className={`${geistSans.className} ${geistMono.variable} antialiased`}
-			>
+			<body className="font-century-gothic antialiased">
 				<ThemeContextProvider>
 					<CartContextProvider>
 						<ToastProvider>

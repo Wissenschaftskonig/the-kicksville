@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { colors, productSizes, SALE_ITEMS, showToast } from "@/utils";
+import { productSizes, SALE_ITEMS, showToast } from "@/utils";
 import { use, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CustomButton from "@/components/CustomButton";
@@ -18,7 +18,6 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 	const router = useRouter();
 	const [mainPicIndex] = useState(0);
 	const [selectedSize, setSelectedSize] = useState<string | undefined>();
-	const [selectedColor, setSelectedColor] = useState<string | undefined>();
 	const { addToCart } = useCart();
 
 	const { id } = use(params);
@@ -33,16 +32,12 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 		setSelectedSize(size);
 	};
 
-	const handleColorSelect = (color: string) => {
-		setSelectedColor(color);
-	};
-
 	const goBack = () => {
 		router.back();
 	};
 
 	const proceedToCart = () => {
-		if (selectedSize || selectedColor) {
+		if (selectedSize) {
 			addToCart({
 				id: item.id,
 				name: item.cardTitle,
@@ -50,7 +45,6 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 				price: item.price,
 				image: item.displayPics[0].pic,
 				quantity: 1,
-				color: selectedColor,
 			});
 
 			showToast("success", `${item.cardTitle} added to cart`);
@@ -95,32 +89,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 					</p>
 				</div>
 
-				<div className="">
-					<div className="flex justify-between items-center">
-						<div className="flex items-end my-4">
-							<h3>Available Colors</h3>
-							<Icon icon={"mdi:chevron-double-down"} className="h-5 w-5" />
-						</div>
-					</div>
-
-					<ul className="grid grid-cols-5 gap-2 md:gap-4">
-						{colors.map((color) => (
-							<CustomButton
-								key={color.color}
-								buttonText={color.color}
-								style={`w-14 text-sm md:w-28 ${
-									selectedColor === color.color
-										? "transition-all ease-in-out bg-gray-500 text-white"
-										: ""
-								}`}
-								buttonTypeTwo
-								onClick={() => handleColorSelect(color.color)}
-							/>
-						))}
-					</ul>
-				</div>
-
-				<div className="border-black border h-0.5 w-full my-6" />
+				<div className="border-gray-300 border h-0.5 w-full my-6" />
 
 				<div className="">
 					<div className="flex justify-between items-center">
@@ -154,7 +123,7 @@ export default function ProductDetails({ params }: ProductDetailsParams) {
 						buttonSize="btn-wide"
 						style="text-md font-thin uppercase w-full"
 						onClick={proceedToCart}
-						disabled={!selectedSize && !selectedColor}
+						disabled={!selectedSize}
 					/>
 				</div>
 			</section>

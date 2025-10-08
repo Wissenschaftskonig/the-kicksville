@@ -34,7 +34,9 @@ const Navbar = () => {
 					/>
 				</div>
 
-				<p className={`text-3xl hidden md:block text-red-500`}>Redpay Store</p>
+				<p className={`text-3xl font-black hidden md:block text-red-500`}>
+					Redpay Store
+				</p>
 
 				<div className="flex gap-3 items-center">
 					<div className="flex items-start">

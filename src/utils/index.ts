@@ -94,12 +94,6 @@ export const productSizes = [
 	},
 ];
 
-export const colors = [
-	{
-		color: "Red",
-	},
-];
-
 export const generateCustomerReference = (length: number = 18): string => {
 	const characters = "0123456789";
 	let result = "";
