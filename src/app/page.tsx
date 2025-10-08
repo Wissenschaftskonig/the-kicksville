@@ -1,6 +1,6 @@
 "use client";
 
-import { POS } from "@/images";
+import { POS, POS2 } from "@/images";
 import Image from "next/image";
 import "./globals.css";
 import Card from "@/components/Card";
@@ -57,13 +57,20 @@ export default function Home() {
 							)}
 						</div>
 
-						<div className="animate-zoom">
+						<div className="">
 							<Image
 								alt="main product photo"
 								src={POS}
 								height={500}
 								width={500}
-								className=""
+								className="rounded-2xl hidden lg:block"
+							/>
+							<Image
+								src={POS2}
+								alt="main product photo"
+								height={500}
+								width={500}
+								className="rounded-2xl lg:hidden animate-zoom"
 							/>
 						</div>
 					</aside>
