@@ -47,10 +47,7 @@ export const CartContextProvider = ({
 	const addToCart = (item: CartItem) => {
 		setCartItems((currentItems) => {
 			const existingItemIndex = currentItems.findIndex(
-				(cartItem) =>
-					cartItem.id === item.id ||
-					cartItem.size === item.size ||
-					cartItem.color === item.color
+				(cartItem) => cartItem.id === item.id
 			);
 
 			let updatedItems;
@@ -66,12 +63,9 @@ export const CartContextProvider = ({
 		});
 	};
 
-	const removeFromCart = (id: string, size: string) => {
+	const removeFromCart = (id: string) => {
 		setCartItems((currentItems) => {
-			const updatedItems = currentItems.filter(
-				(item) =>
-					!(item.id === id || item.size === size || item.color === item.color)
-			);
+			const updatedItems = currentItems.filter((item) => !(item.id === id));
 
 			sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));
 			return updatedItems;
@@ -81,9 +75,7 @@ export const CartContextProvider = ({
 	const updateQuantity = (id: string, size: string, quantity: number) => {
 		setCartItems((currentItems) => {
 			const updatedItems = currentItems.map((item) =>
-				item.id === id || item.size === size || item.color === item.color
-					? { ...item, quantity }
-					: item
+				item.id === id ? { ...item, quantity } : item
 			);
 
 			sessionStorage.setItem("cartItems", JSON.stringify(updatedItems));

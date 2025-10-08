@@ -188,8 +188,7 @@ export const SALE_ITEMS = [
 ];
 
 export interface VerifyPaymentRequest {
-	reference: string;
-	email: string;
+	amount: string;
 }
 
 export const dataService = {
@@ -198,7 +197,7 @@ export const dataService = {
 		await new Promise((resolve) => setTimeout(resolve, 1500));
 
 		// Pretend to look up an item by "reference" or something similar
-		const foundItem = SALE_ITEMS.find((item) => item.id === data.reference);
+		const foundItem = SALE_ITEMS.find((item) => item.price === data.amount);
 
 		if (foundItem) {
 			return {

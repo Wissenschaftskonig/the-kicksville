@@ -30,25 +30,21 @@ export default function CartPage() {
 		showToast("success", "Item removed from cart");
 	};
 
-	const verifyRedPayPayment = async (params: any) => {
+	const verifyRedPayPayment = async (amount: string) => {
 		try {
-			const data = {
-				reference: params,
-				email,
-			};
-			const res = await dataService.verifyPayments(data);
-			if (res) {
-				showToast("success", "Payment Successful", { autoClose: 3000 });
-			}
-		} catch (error) {
-			showToast("error", "Payment verification failed", { autoClose: 3000 });
-			console.error("Payment verification error:", error);
+			const res = await dataService.verifyPayments({ amount });
+
+			showToast("success", res.message, { autoClose: 3000 });
+		} catch (err: any) {
+			showToast("error", err.message || "Payment verification failed", {
+				autoClose: 3000,
+			});
 		}
 	};
 
 	const redPayCallback = async (response: any) => {
 		if (response.status === "success" || response.status === "completed") {
-			await verifyRedPayPayment(response.reference.toString());
+			await verifyRedPayPayment(response.item);
 			return;
 		}
 	};
@@ -59,14 +55,17 @@ export default function CartPage() {
 			return;
 		}
 
+		// Generate reference and store it for later verification
+		const ref = `REF-${Math.ceil(Math.random() * 10e10)}`;
+
 		try {
 			const handler = await window.RedPayPop.setup({
 				key: "TPK_BEDFDB10250C9A8DF45C20250319110107", // Test Key
 				amount: calculateTotal() * 100,
 				email,
 				currency: "NGN",
-				channels: ["CARD", "USSD", "TRANSFER"],
-				ref: `REF-${Math.ceil(Math.random() * 10e10)}`,
+				channels: ["CARD", "USSD", "TRANSFER", "MOMO", "OPAY"],
+				ref,
 				onClose: function () {
 					console.log("Window closed.");
 				},
