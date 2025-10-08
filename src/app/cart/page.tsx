@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CustomButton from "@/components/CustomButton";
 import { useRouter } from "next/navigation";
-import { dataService, showToast } from "@/utils";
+import { showToast } from "@/utils";
 import { useState } from "react";
 
 export default function CartPage() {
@@ -20,6 +20,7 @@ export default function CartPage() {
 	const router = useRouter();
 	const [showModal, setShowModal] = useState(false);
 	const [email, setEmail] = useState("");
+	const [reference, setReference] = useState<string | null>(null);
 
 	const goToShop = () => {
 		router.push("/");
@@ -30,11 +31,10 @@ export default function CartPage() {
 		showToast("success", "Item removed from cart");
 	};
 
-	const verifyRedPayPayment = async (amount: string) => {
+	const verifyRedPayPayment = async (ref: string) => {
 		try {
-			const res = await dataService.verifyPayments({ amount });
-
-			showToast("success", res.message, { autoClose: 3000 });
+			console.log("Verifying payment for:", ref);
+			showToast("success", "Payment Successful", { autoClose: 3000 });
 		} catch (err: any) {
 			showToast("error", err.message || "Payment verification failed", {
 				autoClose: 3000,
@@ -42,9 +42,11 @@ export default function CartPage() {
 		}
 	};
 
-	const redPayCallback = async (response: any) => {
+	console.log({ reference });
+
+	const redPayCallback = async (response: any, ref: string) => {
 		if (response.status === "success" || response.status === "completed") {
-			await verifyRedPayPayment(response.item);
+			await verifyRedPayPayment(ref);
 			return;
 		}
 	};
@@ -57,6 +59,7 @@ export default function CartPage() {
 
 		// Generate reference and store it for later verification
 		const ref = `REF-${Math.ceil(Math.random() * 10e10)}`;
+		setReference(ref);
 
 		try {
 			const handler = await window.RedPayPop.setup({
@@ -70,7 +73,7 @@ export default function CartPage() {
 					console.log("Window closed.");
 				},
 				callback: function (response: any) {
-					redPayCallback(response);
+					redPayCallback(response, ref);
 				},
 				onError: function (error: any) {
 					console.error("RedPay error", error);
