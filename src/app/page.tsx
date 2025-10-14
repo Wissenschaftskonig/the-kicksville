@@ -37,7 +37,7 @@ export default function Home() {
 							</p>
 							<Link
 								href={"https://redpay.africa/"}
-								className="bg-white text-black border shadow-black border-black/40 h-10 rounded-md flex items-center justify-center w-fit px-3 cursor-pointer shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group"
+								className="text-lg font-bold -mt-3 shadow-md border border-black/20 w-fit px-4 py-2 rounded-lg text-[#ff0303]"
 							>
 								Explore RedPay
 							</Link>
