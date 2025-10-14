@@ -27,7 +27,7 @@ export default {
 			boxShadow: {
 				custom: "0 4px 30px rgba(0, 0, 0, 0.1)",
 				underlay: "12px 12px 0 -2.5px #fff, 12px 12px 0 0 #000;",
-				darkUnderlay: "12px 12px 0 -2.5px #fcf1d2, 12px 12px 0 0 #000;",
+				darkUnderlay: "12px 12px 0 -1.5px #c80000, 12px 12px 0 0 #000;",
 			},
 			dropShadow: {
 				customDrop: "1rem 1.2rem 1rem rgba(54, 53, 53, 0.87)",

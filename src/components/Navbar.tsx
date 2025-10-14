@@ -1,12 +1,12 @@
 "use client";
 
-import { LOGO } from "@/images";
 import Image from "next/image";
 import React from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ThemeController from "./ThemeController";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContextProvider";
+import { RedpayImage } from "@/images";
 
 const Navbar = () => {
 	const router = useRouter();
@@ -23,20 +23,16 @@ const Navbar = () => {
 	return (
 		<>
 			<nav className="flex items-center justify-between px-4 md:px-8 bg-white/14 rounded-lg h-[78px] shadow-lg backdrop-blur-[6.8px] border-white/2 sticky top-0 z-50">
-				<div className="">
+				<div className="mx-auto">
 					<Image
 						alt="logo"
-						src={LOGO}
-						height={50}
-						width={50}
+						src={RedpayImage}
+						height={180}
+						width={180}
 						onClick={goHome}
-						className="hover:cursor-pointer brightness-100 contrast-100"
+						className="hover:cursor-pointer brightness-100 mx-auto contrast-100"
 					/>
 				</div>
-
-				<p className={`text-3xl font-black hidden md:block text-red-500`}>
-					Redpay Store
-				</p>
 
 				<div className="flex gap-3 items-center">
 					<div className="flex items-start">

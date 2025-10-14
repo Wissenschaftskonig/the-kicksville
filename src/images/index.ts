@@ -17,6 +17,7 @@ import PRODUCT_THREE from "./PRODUCT_THREE.jpg";
 import PRODUCT_FOUR from "./PRODUCT_FOUR.jpg";
 import PRODUCT_FIVE from "./PRODUCT_FIVE.jpg";
 import checkoutFlow from "./checkoutFlow-1-2048x1189.png";
+import RedpayImage from "./redpay-preview.png";
 
 export {
 	LOGO,
@@ -38,4 +39,5 @@ export {
 	PRODUCT_FOUR,
 	PRODUCT_FIVE,
 	checkoutFlow,
+	RedpayImage,
 };

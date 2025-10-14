@@ -8,6 +8,7 @@ import "./fliptimer.css";
 import { useEffect, useState } from "react";
 import { SALE_ITEMS } from "@/utils";
 import { checkoutFlow } from "@/images";
+import Link from "next/link";
 
 export default function Home() {
 	const [targetTime, setTargetTime] = useState<number | null>(null);
@@ -24,11 +25,22 @@ export default function Home() {
 					<div className="flex flex-col justify-center items-center w-full lg:w-1/2 gap-10">
 						<aside className="text-left flex flex-col gap-8">
 							<div>
-								<h1 className="text-3xl font-black">Redtech Checkout System</h1>
+								<h1 className="lg:text-3xl text-xl font-black mt-6 md:mt-0">
+									Welcome to Our Store, Powered by RedPay
+								</h1>
 							</div>
 							<p>
-								{`Built for precision, performance, and trust, the Redtech Checkout System delivers a flawless payment experience from start to finish. Engineered for speed, security, and reliability, it seamlessly connects modern payment gateways with real time verification and intelligent session management. The result is a smooth, confident transaction process that feels effortless for users and powerful for businesses. With its elegant interface and advanced backend architecture, Redtech Checkout transforms online payments into a fast, secure, and seamless experience, redefining what it means to pay with confidence.`}
+								Experience seamless shopping with RedPay , a secure, flexible
+								e-commerce payment gateway trusted by businesses worldwide.
+								Accept payments effortlessly, offer your customers more ways to
+								pay, and grow your sales with ease.
 							</p>
+							<Link
+								href={"https://redpay.africa/"}
+								className="bg-white text-black border shadow-black border-black/40 h-10 rounded-md flex items-center justify-center w-fit px-3 text-lg cursor-pointer shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group"
+							>
+								Explore RedPay
+							</Link>
 						</aside>
 
 						{/* {firstItem && (
