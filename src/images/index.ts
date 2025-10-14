@@ -12,7 +12,7 @@ import IMG_EIGHT from "./imgEight.jpg";
 import SNEAKER_ONE from "./AIR_MAX_DN_SE-removebg-preview.png";
 import SNEAKER_TWO from "./NIKE_DUNK_HI_RETRO-removebg-preview.png";
 import SNEAKER_THREE from "./AIR_JORDAN_1_RETRO_LOW_OG-removebg-preview.png";
-import PRODUCT_TWO from "./PRODUCT_TWO.jpg";
+import PRODUCT_TWO from "./PRODUCT_TWO.jpeg";
 import PRODUCT_THREE from "./PRODUCT_THREE.jpg";
 import PRODUCT_FOUR from "./PRODUCT_FOUR.jpg";
 import PRODUCT_FIVE from "./PRODUCT_FIVE.jpg";

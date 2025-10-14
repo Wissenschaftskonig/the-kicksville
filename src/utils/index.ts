@@ -154,13 +154,13 @@ export const SALE_ITEMS = [
 			"Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
 	},
 	{
-		id: "redtech-sweatshirt",
+		id: "redtech-biro",
 		imageSource: PRODUCT_TWO,
-		cardTitle: "Redtech Sweatshirt",
-		price: "500",
+		cardTitle: "Redtech Biro",
+		price: "50",
 		displayPics: slideShowTwo,
 		description:
-			"Engineered for performance and comfort, the Redtech Sweatshirt combines premium cotton-blend fabric with a streamlined fit. Its breathable, midweight design makes it perfect for layering, while the subtle Redtech branding delivers a confident, understated edge. Ideal for both active days and downtime.",
+			"Designed for those who value expression and elegance, the Redtech Biro turns everyday writing into an effortless experience. With its smooth ink flow and refined grip, it glides across the page with precision and ease. Lightweight, stylish, and reliable — it’s more than a pen; it’s a statement of confidence and creativity in your hand",
 	},
 	{
 		id: "redtech-bottle-water",

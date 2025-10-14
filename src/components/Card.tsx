@@ -25,6 +25,7 @@ const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 			"redtech-bottle-water",
 			"redtech-beanie",
 			"redtech-book",
+			"redtech-biro",
 		];
 
 		if (item?.id && cartItems.includes(item.id)) {
@@ -46,7 +47,7 @@ const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 	}
 
 	return (
-		<div className="border-2 rounded-md border-black  lg:w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-2">
+		<div className="border-2 rounded-md border-black lg:w-[15rem] shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group p-0">
 			<div className="overflow-hidden">
 				<Image
 					height={250}
