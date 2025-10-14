@@ -37,20 +37,11 @@ export default function Home() {
 							</p>
 							<Link
 								href={"https://redpay.africa/"}
-								className="bg-white text-black border shadow-black border-black/40 h-10 rounded-md flex items-center justify-center w-fit px-3 text-lg cursor-pointer shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group"
+								className="bg-white text-black border shadow-black border-black/40 h-10 rounded-md flex items-center justify-center w-fit px-3 cursor-pointer shadow-custom hover:shadow-underlay dark:hover:shadow-darkUnderlay transition-all duration-500 ease-in-out text-center group"
 							>
 								Explore RedPay
 							</Link>
 						</aside>
-
-						{/* {firstItem && (
-							<Card
-								imageSource={firstItem.imageSource}
-								cardTitle={firstItem.cardTitle}
-								cardId={firstItem.id}
-								price={firstItem.price}
-							/>
-						)} */}
 					</div>
 
 					<aside className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6">
