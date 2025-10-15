@@ -63,7 +63,7 @@ export default function CartPage() {
 
 		try {
 			const handler = await window.RedPayPop.setup({
-				key: "TPK_BEDFDB10250C9A8DF45C20250319110107", // Test Key
+				key: "PK_A5B84429D5F3F20EFA9B20250319110107", // Test Key
 				amount: calculateTotal() * 100,
 				email,
 				currency: "NGN",
