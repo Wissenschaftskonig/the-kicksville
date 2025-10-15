@@ -67,7 +67,7 @@ export default function CartPage() {
 				amount: calculateTotal() * 100,
 				email,
 				currency: "NGN",
-				channels: ["CARD", "USSD", "TRANSFER",],
+				channels: ["CARD", "USSD", "TRANSFER"],
 				ref,
 				onClose: function () {
 					console.log("Window closed.");
