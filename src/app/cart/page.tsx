@@ -34,6 +34,9 @@ export default function CartPage() {
 	const verifyRedPayPayment = async (ref: string) => {
 		try {
 			console.log("Verifying payment for:", ref);
+			router.push("/");
+			clearCart();
+			setShowModal(false);
 			showToast("success", "Payment Successful", { autoClose: 3000 });
 		} catch (err: any) {
 			showToast("error", err.message || "Payment verification failed", {

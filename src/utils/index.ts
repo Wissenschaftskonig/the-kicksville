@@ -157,7 +157,7 @@ export const SALE_ITEMS = [
 		id: "redtech-biro",
 		imageSource: PRODUCT_TWO,
 		cardTitle: "Redtech Biro",
-		price: "50",
+		price: "200",
 		displayPics: slideShowTwo,
 		description:
 			"Designed for those who value expression and elegance, the Redtech Biro turns everyday writing into an effortless experience. With its smooth ink flow and refined grip, it glides across the page with precision and ease. Lightweight, stylish, and reliable — it’s more than a pen; it’s a statement of confidence and creativity in your hand",
