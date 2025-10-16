@@ -162,15 +162,15 @@ export const SALE_ITEMS = [
 		description:
 			"Designed for those who value expression and elegance, the Redtech Biro turns everyday writing into an effortless experience. With its smooth ink flow and refined grip, it glides across the page with precision and ease. Lightweight, stylish, and reliable — it’s more than a pen; it’s a statement of confidence and creativity in your hand",
 	},
-	{
-		id: "redtech-bottle-water",
-		imageSource: PRODUCT_THREE,
-		cardTitle: "Redtech Bottle Water",
-		price: "200",
-		displayPics: slideShowThree,
-		description:
-			"Elevate your hydration with the Redtech Bottle Water, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
-	},
+	// {
+	// 	id: "redtech-bottle-water",
+	// 	imageSource: PRODUCT_THREE,
+	// 	cardTitle: "Redtech Bottle Water",
+	// 	price: "200",
+	// 	displayPics: slideShowThree,
+	// 	description:
+	// 		"Elevate your hydration with the Redtech Bottle Water, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
+	// },
 	{
 		id: "redtech-book",
 		imageSource: PRODUCT_FOUR,
