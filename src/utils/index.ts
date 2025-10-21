@@ -162,32 +162,32 @@ export const SALE_ITEMS = [
 		description:
 			"Designed for those who value expression and elegance, the Redtech Biro turns everyday writing into an effortless experience. With its smooth ink flow and refined grip, it glides across the page with precision and ease. Lightweight, stylish, and reliable — it’s more than a pen; it’s a statement of confidence and creativity in your hand",
 	},
-	// {
-	// 	id: "redtech-bottle-water",
-	// 	imageSource: PRODUCT_THREE,
-	// 	cardTitle: "Redtech Bottle Water",
-	// 	price: "200",
-	// 	displayPics: slideShowThree,
-	// 	description:
-	// 		"Elevate your hydration with the Redtech Bottle Water, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
-	// },
+	{
+		id: "redtech-bottle-water",
+		imageSource: PRODUCT_THREE,
+		cardTitle: "Redtech Bottle",
+		price: "200",
+		displayPics: slideShowThree,
+		description:
+			"Elevate your hydration with the Redtech Water Bottle, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
+	},
 	{
 		id: "redtech-book",
 		imageSource: PRODUCT_FOUR,
-		cardTitle: "Redtech Book",
+		cardTitle: "Redtech Notepad",
 		price: "200",
 		displayPics: slideShowFour,
 		description:
-			"The Redtech Book is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
+			"The Redtech Notepad is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
 	},
 	{
 		id: "redtech-shirt",
 		imageSource: PRODUCT_FIVE,
-		cardTitle: "Redtech Shirt",
+		cardTitle: "Redtech Polo",
 		price: "200",
 		displayPics: slideShowFive,
 		description:
-			"Crafted for precision and comfort, the Redtech Shirt blends lightweight fabric with a refined fit that moves with you. Whether for work, casual outings, or creative sessions, it embodies the Redtech balance of performance and style — where simplicity meets substance.",
+			"Crafted for precision and comfort, the Redtech Polo blends lightweight fabric with a refined fit that moves with you. Whether for work, casual outings, or creative sessions, it embodies the Redtech balance of performance and style — where simplicity meets substance.",
 	},
 ];
 
