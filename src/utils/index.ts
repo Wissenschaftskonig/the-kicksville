@@ -152,7 +152,7 @@ export const SALE_ITEMS = [
     id: "redtech-face-cap",
     imageSource: FACE_CAP,
     cardTitle: "Redtech Face Cap",
-    price: "10000",
+    price: "5000",
     displayPics: slideShow,
     description:
       "Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
@@ -170,7 +170,7 @@ export const SALE_ITEMS = [
     id: "redtech-bottle-water",
     imageSource: PRODUCT_THREE,
     cardTitle: "Redtech Bottle",
-    price: "10000",
+    price: "5000",
     displayPics: slideShowThree,
     description:
       "Elevate your hydration with the Redtech Water Bottle, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
@@ -179,7 +179,7 @@ export const SALE_ITEMS = [
     id: "redtech-key-holder",
     imageSource: KEY_HOLDER,
     cardTitle: "Redtech Keyholder",
-    price: "5000",
+    price: "1000",
     displayPics: slideShowFour,
     description:
       "The Redtech Notepad is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
@@ -188,7 +188,7 @@ export const SALE_ITEMS = [
     id: "redtech-shirt",
     imageSource: ONE_SHIRT,
     cardTitle: "Redtech Polo",
-    price: "10000",
+    price: "5000",
     displayPics: slideShowFive,
     description:
       "Crafted for precision and comfort, the Redtech Polo blends lightweight fabric with a refined fit that moves with you. Whether for work, casual outings, or creative sessions, it embodies the Redtech balance of performance and style — where simplicity meets substance.",
