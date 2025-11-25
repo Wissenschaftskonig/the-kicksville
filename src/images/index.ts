@@ -21,6 +21,7 @@ import RedpayImage from "./redpay-preview.png";
 import FACE_CAP from "./FACE_CAP.jpg";
 import HAND_FAN from "./HAND_FAN.jpg";
 import KEY_HOLDER from "./KEY_HOLDER.jpg";
+import ONE_SHIRT from "./ONE_SHIRT.jpg";
 
 export {
 	LOGO,
@@ -46,4 +47,5 @@ export {
 	FACE_CAP,
 	HAND_FAN,
 	KEY_HOLDER,
+	ONE_SHIRT,
 };

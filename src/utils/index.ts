@@ -1,12 +1,13 @@
 import {
 	// IMG_ONE,
-	PRODUCT_FIVE,
+	// PRODUCT_FIVE,
 	// PRODUCT_FOUR, 
 	PRODUCT_THREE,
 	// PRODUCT_TWO,
 	FACE_CAP,
 	HAND_FAN,
 	KEY_HOLDER,
+	ONE_SHIRT,
 } from "@/images";
 import { toast, ToastContent, ToastOptions, Slide, Id } from "react-toastify";
 
@@ -81,7 +82,7 @@ export const slideShowFour = [
 ];
 export const slideShowFive = [
 	{
-		pic: PRODUCT_FIVE,
+		pic: ONE_SHIRT,
 	},
 ];
 
@@ -151,7 +152,7 @@ export const SALE_ITEMS = [
     id: "redtech-face-cap",
     imageSource: FACE_CAP,
     cardTitle: "Redtech Face Cap",
-    price: "500",
+    price: "10000",
     displayPics: slideShow,
     description:
       "Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
@@ -160,7 +161,7 @@ export const SALE_ITEMS = [
     id: "redtech-hand-fan",
     imageSource: HAND_FAN,
     cardTitle: "Redtech Hand Fan",
-    price: "200",
+    price: "5000",
     displayPics: slideShowTwo,
     description:
       "Designed for those who value expression and elegance, the Redtech Biro turns everyday writing into an effortless experience. With its smooth ink flow and refined grip, it glides across the page with precision and ease. Lightweight, stylish, and reliable — it’s more than a pen; it’s a statement of confidence and creativity in your hand",
@@ -169,7 +170,7 @@ export const SALE_ITEMS = [
     id: "redtech-bottle-water",
     imageSource: PRODUCT_THREE,
     cardTitle: "Redtech Bottle",
-    price: "200",
+    price: "10000",
     displayPics: slideShowThree,
     description:
       "Elevate your hydration with the Redtech Water Bottle, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
@@ -178,16 +179,16 @@ export const SALE_ITEMS = [
     id: "redtech-key-holder",
     imageSource: KEY_HOLDER,
     cardTitle: "Redtech Keyholder",
-    price: "100",
+    price: "5000",
     displayPics: slideShowFour,
     description:
       "The Redtech Notepad is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
   },
   {
     id: "redtech-shirt",
-    imageSource: PRODUCT_FIVE,
+    imageSource: ONE_SHIRT,
     cardTitle: "Redtech Polo",
-    price: "500",
+    price: "10000",
     displayPics: slideShowFive,
     description:
       "Crafted for precision and comfort, the Redtech Polo blends lightweight fabric with a refined fit that moves with you. Whether for work, casual outings, or creative sessions, it embodies the Redtech balance of performance and style — where simplicity meets substance.",
