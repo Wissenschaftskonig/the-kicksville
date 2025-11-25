@@ -18,6 +18,9 @@ import PRODUCT_FOUR from "./PRODUCT_FOUR.jpg";
 import PRODUCT_FIVE from "./PRODUCT_FIVE.jpg";
 import checkoutFlow from "./checkoutFlow-1-2048x1189.png";
 import RedpayImage from "./redpay-preview.png";
+import FACE_CAP from "./FACE_CAP.jpg";
+import HAND_FAN from "./HAND_FAN.jpg";
+import KEY_HOLDER from "./KEY_HOLDER.jpg";
 
 export {
 	LOGO,
@@ -40,4 +43,7 @@ export {
 	PRODUCT_FIVE,
 	checkoutFlow,
 	RedpayImage,
+	FACE_CAP,
+	HAND_FAN,
+	KEY_HOLDER,
 };

@@ -23,9 +23,9 @@ const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 	const handleCardClick = () => {
 		const cartItems = [
 			"redtech-bottle-water",
-			"redtech-beanie",
-			"redtech-book",
-			"redtech-biro",
+			"redtech-face-cap",
+			"redtech-key-holder",
+			"redtech-hand-fan",
 		];
 
 		if (item?.id && cartItems.includes(item.id)) {
