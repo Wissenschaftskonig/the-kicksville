@@ -64,7 +64,7 @@ const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 
       <div className="divider px-2 text-gray-600"></div>
 
-      <div className="text-sm flex flex-col justify-center items-center gap-5">
+      <div className="text-sm flex flex-col justify-center items-center gap-5 pb-4">
         <div className="flex flex-col gap-3">
           <p className="flex items-center justify-center">
             <span className="flex items-center">
@@ -86,3 +86,4 @@ const Card = ({ imageSource, cardTitle, price, cardId }: CardProps) => {
 };
 
 export default Card;
+
