@@ -152,7 +152,7 @@ export const SALE_ITEMS = [
     id: "redtech-face-cap",
     imageSource: FACE_CAP,
     cardTitle: "Redtech Face Cap",
-    price: "5000",
+    price: "10000",
     displayPics: slideShow,
     description:
       "Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
@@ -170,7 +170,7 @@ export const SALE_ITEMS = [
     id: "redtech-bottle-water",
     imageSource: PRODUCT_THREE,
     cardTitle: "Redtech Bottle",
-    price: "5000",
+    price: "10000",
     displayPics: slideShowThree,
     description:
       "Elevate your hydration with the Redtech Water Bottle, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
