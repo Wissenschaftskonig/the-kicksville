@@ -8,6 +8,7 @@ import {
 	HAND_FAN,
 	KEY_HOLDER,
 	ONE_SHIRT,
+	IMG_ONE,
 } from "@/images";
 import { toast, ToastContent, ToastOptions, Slide, Id } from "react-toastify";
 
@@ -148,15 +149,15 @@ export const formatAmount = (amount: number): string => {
 };
 
 export const SALE_ITEMS = [
-  {
-    id: "redtech-face-cap",
-    imageSource: FACE_CAP,
-    cardTitle: "Redtech Face Cap",
-    price: "1000",
-    displayPics: slideShow,
-    description:
-      "Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
-  },
+  //   {
+  //     id: "redtech-face-cap",
+  //     imageSource: FACE_CAP,
+  //     cardTitle: "Redtech Face Cap",
+  //     price: "1000",
+  //     displayPics: slideShow,
+  //     description:
+  //       "Stay sharp and comfortable with the Redtech Beanie, designed for effortless style and all-day warmth. Its soft-knit fabric offers a snug fit that keeps you focused whether you’re working, training, or out in the city. Minimalist, durable, and made to complement every outfit — it’s everyday versatility redefined.",
+  //   },
   {
     id: "redtech-hand-fan",
     imageSource: HAND_FAN,
@@ -170,19 +171,19 @@ export const SALE_ITEMS = [
     id: "redtech-bottle-water",
     imageSource: PRODUCT_THREE,
     cardTitle: "Redtech Bottle",
-    price: "1000",
+    price: "2000",
     displayPics: slideShowThree,
     description:
       "Elevate your hydration with the Redtech Water Bottle, designed for clarity, function, and sustainability. Featuring a durable, BPA-free build and ergonomic grip, this bottle keeps your drink fresh while reflecting Redtech’s modern aesthetic. Whether at the gym, office, or on the go — stay refreshed, Redtech style.",
   },
   {
     id: "redtech-key-holder",
-    imageSource: KEY_HOLDER,
-    cardTitle: "Redtech Keyholder",
-    price: "500",
+    imageSource: IMG_ONE,
+    cardTitle: "Redtech Beanie",
+    price: "1000",
     displayPics: slideShowFour,
     description:
-      "The Redtech Notepad is more than just pages — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium paper stock, and flexible binding, it’s perfect for notes, sketches, and big ideas. Bring structure and creativity together in one timeless notebook.",
+      "The Redtech Beanie Cap is more than just apparel — it’s a companion for thinkers, creators, and innovators. With a clean minimalist design, premium knit fabric, and a comfortable fit, it’s perfect for cold mornings, outdoor adventures, and everyday style. Bring warmth, comfort, and creativity together in one timeless beanie.",
   },
   {
     id: "redtech-shirt",
